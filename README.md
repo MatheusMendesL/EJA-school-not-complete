@@ -17,6 +17,8 @@ Os alunos tem uma pontuação e um ranking geral.
 - **Backend**: API em NODE.
 - **Autenticação**: JWT.
 
+---
+
 ## Estrutura do projeto
 
 - **Estrutura Backend**: Servidor Node com a API, autenticação e controle da API.
