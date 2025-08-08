@@ -2,7 +2,7 @@
 *Uma plataforma sobre um EJA para maiores de 18 anos*
 
 ## Introdução
-É um projeto onde os adultos iriam fazer exercícios para as matérias que eles desejam.
+É uma plataforma onde os adultos iriam fazer exercícios para as matérias que eles desejam.
 Os alunos tem uma pontuação e um ranking geral.
 
 - Autenticação com JWT.
