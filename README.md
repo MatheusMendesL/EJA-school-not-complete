@@ -13,11 +13,11 @@ Os alunos tem uma pontuação e um ranking geral.
 
 ## Stack
 
--- **Frontend**: HTML, CSS, JS.
--- **Backend**: API em NODE.
--- **Autenticação**: JWT.
+- **Frontend**: HTML, CSS, JS.
+- **Backend**: API em NODE.
+- **Autenticação**: JWT.
 
 ## Estrutura do projeto
 
--- **Estrutura Backend**: Servidor Node com a API, autenticação e controle da API.
--- **Estrutura Frontend**: Toda a estrutura para pegar o retorno da API e a parte do layout.
+- **Estrutura Backend**: Servidor Node com a API, autenticação e controle da API.
+- **Estrutura Frontend**: Toda a estrutura para pegar o retorno da API e a parte do layout.
