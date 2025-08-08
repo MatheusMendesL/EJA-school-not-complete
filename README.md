@@ -5,9 +5,9 @@
 É um projeto onde os adultos iriam fazer exercícios para as matérias que eles desejam.
 Os alunos tem uma pontuação e um ranking geral.
 
--- Autenticação com JWT.
--- API em NODE.
--- Frontend com JS.
+- Autenticação com JWT.
+- API em NODE.
+- Frontend com JS.
 
 ---
 
