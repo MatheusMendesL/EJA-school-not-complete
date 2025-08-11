@@ -2,6 +2,7 @@ Pra eu aprender:
 Colocar docker
 Ser SPA
 Fazer rotas seguras e privadas p cada user com o node
+
+oq ja foi feito:
 Entender e arrumar como funciona a organização de pastas em uma api node
 Toda vez que eu fizer alteração tem q ter um commit
-
