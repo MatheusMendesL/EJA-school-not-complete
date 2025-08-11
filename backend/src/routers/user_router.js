@@ -4,6 +4,7 @@ const router = express.Router()
 
 // rotas que pegam com base no que o controller manda
 
-router.get('/add_user/:name/:email/:tel/:pass', functionsControllers.add_user)
+router.get('/signup/:name/:email/:tel/:pass', functionsControllers.signup)
+router.get('/login/:email/:password', functionsControllers.login)
 
 module.exports = router
