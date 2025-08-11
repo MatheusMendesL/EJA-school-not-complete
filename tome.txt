@@ -5,3 +5,4 @@ Fazer rotas seguras e privadas p cada user com o node
 Entender e arrumar como funciona a organização de pastas em uma api node
 Toda vez que eu fizer alteração tem q ter um commit
 
+aa
