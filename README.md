@@ -1,3 +1,5 @@
+Para rodar o docker, desistir do laragon
+
 ## Estudadores.edu
 *Uma plataforma sobre um EJA para maiores de 18 anos*
 

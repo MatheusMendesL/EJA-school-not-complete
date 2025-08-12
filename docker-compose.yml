@@ -1,0 +1,52 @@
+# Use a sintaxe mais recente
+version: "3.8"
+
+services:
+  # Serviço para o banco de dados MySQL
+  mysql:
+    # Usa a imagem oficial mais recente do MySQL
+    image: mysql:latest
+    container_name: meu-mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: estudadores
+      MYSQL_USER: estudadores_user
+      MYSQL_PASSWORD: matheus
+    ports:
+      - "3306:3306"
+    networks:
+      - minha-rede
+    volumes:
+      - mysql-data:/var/lib/mysql
+    # Adicionamos uma verificação de saúde para garantir que o MySQL está pronto
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Serviço para o backend da aplicação
+  backend:
+    build:
+      context: .
+    container_name: meu-backend-container
+    environment:
+      HOST: "mysql"
+      PORT: "3306"
+      USER: "estudadores_user"
+      PASS: "matheus"
+      DATABASE: "estudadores"
+    ports:
+      - "3000:3000"
+    networks:
+      - minha-rede
+    # Depende do MySQL e espera que ele esteja com a saúde em dia
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+networks:
+  minha-rede:
+
+volumes:
+  mysql-data:
