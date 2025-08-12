@@ -3,6 +3,19 @@ const conn = require('../config/database');
 // resolve: promise com sucesso
 // reject: promise com algum erro, vem com um if normalmente
 
+function get_user_data(data){
+    return new Promise((resolve, reject) => {
+        if(!data) return reject(new Error('You need an id'))
+
+        const query_sql = 'SELECT * FROM users WHERE id_user = ?'
+
+        conn.query(query_sql, [data.id], (error, results) => {
+            if(error) return reject(error)
+                resolve({ query_sql, affectedRows: results.length, data: results })
+        })
+    })
+}
+
 function signup(data) {
 
     // resolve é caso ser resolvido e reject se for rejeitado por um motivo, como !data e error = true
@@ -33,4 +46,13 @@ function login(data) {
     })
 }
 
-module.exports = { signup, login };
+
+function get_level_xp() {
+
+}
+
+function update_xp_level(){
+
+}
+
+module.exports = { get_user_data, signup, login, get_level_xp, update_xp_level };

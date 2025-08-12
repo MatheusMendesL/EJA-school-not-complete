@@ -3,6 +3,19 @@ const { response } = require('../utils/functions');
 
 // todas serão dessa forma
 
+async function get_user(req, res) {
+    const get_data = {
+        id: req.params.id
+    }
+
+    try{
+        const { query_sql, affectedRows, data } = await functionsModel.get_user_data(get_data);
+        res.json(response('success', 'Got user data successfully', query_sql, affectedRows, data));
+    } catch(error){
+        res.status(500).json(response('error', error.message, null, 0, null));
+    }
+}
+
 async function signup(req, res) {
     const data = {
         name: req.params.name,
@@ -29,6 +42,7 @@ async function login(req, res){
         password: req.params.password
     }
 
+
     try{
         const { query_sql, affected_rows, data } = await functionsModel.login(loginData)
         res.json(response('success', 'Login was conclused successfully', query_sql, affected_rows, data))
@@ -37,6 +51,23 @@ async function login(req, res){
     }
 }
 
-module.exports = { signup, login };
+async function get_level_xp(req, res){
+
+
+    res.send('teste')
+    /* try{
+        const { query_sql, affected_rows, data, level, xp} = await functionsModel.get_level_xp()
+        res.json(response('success', `Your xp is: ${xp} and level: ${level}`, query_sql, affected_rows, data))
+    } catch(error){
+        res.status(500).json(response('error', error.message, null, 0, null));
+    } */
+
+}
+
+async function update_xp_level(req, res){
+
+}
+
+module.exports = { get_user, signup, login, get_level_xp, update_xp_level};
 
 
