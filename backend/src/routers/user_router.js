@@ -10,4 +10,5 @@ router.get('/login/:email/:password', functionsControllers.login)
 router.get('/xp/:id', functionsControllers.get_level_xp)
 router.get('/update_level/:id', functionsControllers.update_xp_level)
 
+
 module.exports = router
