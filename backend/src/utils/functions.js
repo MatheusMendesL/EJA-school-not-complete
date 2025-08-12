@@ -4,7 +4,7 @@ function response(status, message, query, affected_rows, data) {
         message: message, 
         query: query, 
         affected_rows: affected_rows, 
-        timestamp: new Date().getTime(),
+        timestamp: new Date().toISOString(),
         data: data
     }
 }

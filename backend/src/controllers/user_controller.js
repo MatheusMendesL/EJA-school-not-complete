@@ -8,10 +8,10 @@ async function get_user(req, res) {
         id: req.params.id
     }
 
-    try{
+    try {
         const { query_sql, affectedRows, data } = await functionsModel.get_user_data(get_data);
         res.json(response('success', 'Got user data successfully', query_sql, affectedRows, data));
-    } catch(error){
+    } catch (error) {
         res.status(500).json(response('error', error.message, null, 0, null));
     }
 }
@@ -36,14 +36,14 @@ async function signup(req, res) {
 }
 
 
-async function login(req, res){
+async function login(req, res) {
     const loginData = {
         email: req.params.email,
         password: req.params.password
     }
 
 
-    try{
+    try {
         const { query_sql, affected_rows, data } = await functionsModel.login(loginData)
         res.json(response('success', 'Login was conclused successfully', query_sql, affected_rows, data))
     } catch (error) {
@@ -51,23 +51,28 @@ async function login(req, res){
     }
 }
 
-async function get_level_xp(req, res){
+async function get_level_xp(req, res) {
 
-
-    res.send('teste')
-    /* try{
-        const { query_sql, affected_rows, data, level, xp} = await functionsModel.get_level_xp()
+    const id = req.params.id
+    try {
+        const { query_sql, affected_rows, data, xp, level } = await functionsModel.get_level_xp(id)
         res.json(response('success', `Your xp is: ${xp} and level: ${level}`, query_sql, affected_rows, data))
-    } catch(error){
+    } catch (error) {
         res.status(500).json(response('error', error.message, null, 0, null));
-    } */
+    }
 
 }
 
-async function update_xp_level(req, res){
-
+async function update_xp_level(req, res) {
+    const id = req.params.id
+    try {
+        const { query_sql, affected_rows, data, xp, level } = await functionsModel.update_xp_level(id)
+        res.json(response('success', `Your xp is: ${xp} and level: ${level}`, query_sql, affected_rows, data))
+    } catch (error) {
+        res.status(500).json(response('error', error.message, null, 0, null));
+    }
 }
 
-module.exports = { get_user, signup, login, get_level_xp, update_xp_level};
+module.exports = { get_user, signup, login, get_level_xp, update_xp_level };
 
 
