@@ -1,4 +1,4 @@
--- Tabela dos usuários:
+-- Tabela dos usuários
 CREATE TABLE users (
     id_user INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -10,22 +10,36 @@ CREATE TABLE users (
     created_at DATETIME NOT NULL
 );
 
--- Tabela do progresso dos usuários nas lições:
-CREATE TABLE user_progress (
-    id_user INT NOT NULL,
-    api_lesson_id VARCHAR(100) NOT NULL,
-    completed BOOLEAN DEFAULT FALSE,
-    score INT DEFAULT 0,
-    completed_at DATETIME NULL,
-    PRIMARY KEY (id_user, api_lesson_id),
-    FOREIGN KEY (id_user) REFERENCES users(id_user)
+-- Tabela de matérias
+CREATE TABLE matter (
+    id_matter INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,   
+    description TEXT                      
 );
 
--- Tabela para organização da API 
-CREATE TABLE api_lessons_cache (
-    api_lesson_id VARCHAR(100) PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    matter VARCHAR(100) NOT NULL,
-    content TEXT,
-    last_updated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+-- Tabela de lições
+CREATE TABLE lesson (
+    id_lesson INT AUTO_INCREMENT PRIMARY KEY,
+    matter_id INT NOT NULL,                
+    title VARCHAR(255) NOT NULL,           
+    content TEXT NOT NULL,                 
+    level ENUM('básico', 'intermediário', 'avançado') DEFAULT 'básico', 
+    created_at DATETIME NOT NULL,         
+    updated_at DATETIME NOT NULL,         
+    FOREIGN KEY (matter_id) REFERENCES matter(id_matter) ON DELETE CASCADE
+);
+
+-- Tabela de tarefas (perguntas de múltipla escolha)
+CREATE TABLE task (
+    id_task INT AUTO_INCREMENT PRIMARY KEY,
+    lesson_id INT NOT NULL,              
+    question TEXT NOT NULL,               
+    option_a VARCHAR(255) NOT NULL,       
+    option_b VARCHAR(255) NOT NULL,     
+    option_c VARCHAR(255) NOT NULL,      
+    option_d VARCHAR(255) NOT NULL,      
+    correct_answer ENUM('A', 'B', 'C', 'D') NOT NULL,  
+    created_at DATETIME NOT NULL,         
+    updated_at DATETIME NOT NULL,         
+    FOREIGN KEY (lesson_id) REFERENCES lesson(id_lesson) ON DELETE CASCADE
 );
