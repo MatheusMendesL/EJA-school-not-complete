@@ -1,5 +1,3 @@
-<!-- mudar a prr td pro meu-->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,18 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/poster.css">
 
 
 </head>
 
 <body>
 
-    <header>
+    <!-- <header>
         <div id="header-div-logo">
             <img id="header-logo" src="/img/logo-black-mode.png" alt="logo animes hub"
-                onclick="loadPage(undefined,'Animes Hub')">
+                onclick="loadPage(undefined,'Anime Hub')">
         </div>
 
         <div class="header-div-elements" data-open="false">
@@ -49,7 +45,7 @@
             </div>
 
 
-            <!--<input type="checkbox" class="theme-checkbox" checked onchange="changeTheme()">-->
+            <!--<input type="checkbox" class="theme-checkbox" checked onchange="changeTheme()">
             <div id="div-input-search">
 
                 <img src="/img/search-icon.png" alt="search-button" class="icon">
@@ -74,17 +70,17 @@
             </li>
 
         </ul>
-    </dialog>
+    </dialog> -->
 
     <div id="app">
 
 
 
     </div>
-    <script src="/js/header.js" class="base-js"></script>
+
     <script class="base-js">
 
-        function loadPage(path = "home", title = "Animes Hub", params = "") {
+        function loadPage(path = "home", title = "Anime Hub", params = "") {
             /*
             if (sessionStorage.getItem(param) !== null) {
                 console.log(sessionStorage.getItem(param))
@@ -99,7 +95,7 @@
             const url = (params) ? `/api/getHTML?p=${path}&${params}` : `/api/getHTML?p=${path}`
             console.log(url)
             fetch(url, {
-                method: "POST",
+                method: "GET",
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -113,9 +109,9 @@
 
                     document.querySelector("#app").innerHTML = data
 
-                    const urlStatics = (path) ? path : "home"
-                    loadCSS(urlStatics)
-                    loadJS(urlStatics)
+                    const urls = (path) ? path : "home"
+                    loadCSS(urls)
+                    loadJS(urls)
                     sessionStorage.setItem(path, data)
                     document.title = title
                     const paramUrl = (params.includes("?")) ? params : "?" + params
