@@ -87,26 +87,40 @@ function get_level_xp(id) {
   });
 }
 
-function update_xp_level(id) {
-  return new Promise((resolve, reject) => {
-    if (!id) return reject(new Error("You didn´t send a data"));
-    const data = get_level_xp(id);
-    if (data.xp >= 1000) {
-      const level = data.ranking + 1;
-      const query_sql = "UPDATE SET xp = 0 ranking = ? WHERE id_user = ?";
+async function update_xp_level(id) {
+  return new Promise(async (resolve, reject) => {
+    if (!id) return reject(new Error("You didn't send a data"));
 
-      conn.query(query_sql, [level, id], (error, results) => {
-        if (error) return reject(error);
-        resolve({
-          query_sql,
-          affected_rows: results.length,
-          data: results,
-          message: `You new level is ${level} and your xp is 0`,
+    try {
+      const { xp, level } = await get_level_xp(id); // agora espera a função
+
+      if (xp >= 1000) {
+        const newLevel = level + 1;
+        const query_sql = "UPDATE users SET xp = 0, ranking = ? WHERE id_user = ?";
+
+        conn.query(query_sql, [newLevel, id], (error, results) => {
+          if (error) return reject(error);
+          resolve({
+            query_sql,
+            affected_rows: results.affectedRows,
+            data: results,
+            message: `Your new level is ${newLevel} and your xp is 0`
+          });
         });
-      });
+      } else {
+        resolve({
+          query_sql: null,
+          affected_rows: 0,
+          data: null,
+          message: `XP not enough to level up. Current XP: ${xp}`
+        });
+      }
+    } catch (error) {
+      reject(error);
     }
   });
 }
+
 
 module.exports = {
   get_user_data,

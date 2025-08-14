@@ -26,11 +26,13 @@ async function get_user(req, res) {
 }
 
 async function signup(req, res) {
+
+  const {name, email, tel, password} = req.body
   const data = {
-    name: req.params.name,
-    email: req.params.email,
-    tel: req.params.tel,
-    password: req.params.pass,
+    name: name,
+    email: email,
+    tel: tel,
+    password: password,
   };
 
   try {
@@ -52,9 +54,11 @@ async function signup(req, res) {
 }
 
 async function login(req, res) {
+
+  const {email, password} = req.body
   const loginData = {
-    email: req.params.email,
-    password: req.params.password,
+    email: email,
+    password: password
   };
 
   try {

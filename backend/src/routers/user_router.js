@@ -5,10 +5,10 @@ const router = express.Router()
 // rotas que pegam com base no que o controller manda
 
 router.get('/get_user_data/:id', functionsControllers.get_user)
-router.get('/signup/:name/:email/:tel/:pass', functionsControllers.signup)
-router.get('/login/:email/:password', functionsControllers.login)
+router.post('/signup', functionsControllers.signup)
+router.post('/login', functionsControllers.login)
 router.get('/xp/:id', functionsControllers.get_level_xp)
-router.get('/update_level/:id', functionsControllers.update_xp_level)
+router.put('/update_level/:id', functionsControllers.update_xp_level)
 
 
 module.exports = router
