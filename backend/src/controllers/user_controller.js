@@ -1,5 +1,7 @@
 const functionsModel = require("../models/user_model");
 const { response } = require("../utils/functions");
+const jwt = require('jsonwebtoken');
+const SECRET_KEY = require('../config/config_jwt')
 
 // todas serão dessa forma
 
@@ -27,7 +29,7 @@ async function get_user(req, res) {
 
 async function signup(req, res) {
 
-  const {name, email, tel, password} = req.body
+  const { name, email, tel, password } = req.body
   const data = {
     name: name,
     email: email,
@@ -55,7 +57,7 @@ async function signup(req, res) {
 
 async function login(req, res) {
 
-  const {email, password} = req.body
+  const { email, password } = req.body
   const loginData = {
     email: email,
     password: password
@@ -65,13 +67,20 @@ async function login(req, res) {
     const { query_sql, affected_rows, data } = await functionsModel.login(
       loginData
     );
+
+    const token = jwt.sign(
+      { id_user: data.id_user, email: data.email },
+      SECRET_KEY,
+      { expiresIn: '7d' }
+    );
+
     res.json(
       response(
         "success",
         "Login was conclused successfully",
         query_sql,
         affected_rows,
-        data
+        { ...data, token }
       )
     );
   } catch (error) {
