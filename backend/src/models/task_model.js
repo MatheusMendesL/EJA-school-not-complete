@@ -15,9 +15,9 @@ function get_tasks(id) {
   });
 }
 
-function get_task_by_id(id){
+function get_task_by_id(id) {
 
-    return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const query_sql = "SELECT * FROM task WHERE id_task = ?";
     conn.query(query_sql, [id], (error, results) => {
       if (error) return reject(new Error("erro"));
@@ -30,4 +30,10 @@ function get_task_by_id(id){
     });
   });
 
+}
+
+
+module.exports = {
+  get_tasks,
+  get_task_by_id
 }
