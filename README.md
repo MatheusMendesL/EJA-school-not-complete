@@ -1,5 +1,5 @@
 Para rodar o docker, desistir do laragon
-arrumar os codigos feitos na aula
+continuar frontend
 
 ## Estudadores.edu
 *Uma plataforma sobre um EJA para maiores de 18 anos*

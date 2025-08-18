@@ -1,168 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-
+    <title>Estudadores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 
 </head>
 
 <body>
 
-    <!-- <header>
-        <div id="header-div-logo">
-            <img id="header-logo" src="/img/logo-black-mode.png" alt="logo animes hub"
-                onclick="loadPage(undefined,'Anime Hub')">
-        </div>
+    <div id="app"></div>
 
-        <div class="header-div-elements" data-open="false">
+    <script src="https://unpkg.com/navigo"></script>
 
-            <label class="burger" for="burger">
-                <input type="checkbox" id="burger" onchange="modalsettings(event)">
-                <span></span>
-                <span></span>
-                <span> </span>
-            </label>
+    <script>
+
+        const router = new Navigo('/');
 
 
-            <div id="profile-div">
-                <img src="/img/profile-button.png" alt="profile button" id="profile-button-img"
-                    onclick="openModalProfile()">
-
-                <div id="modal-profile">
-                    <span onclick="loadPage('signup','Signup')">
-                        Signup
-                    </span>
-                    <span onclick="loadPage('login','Login')">
-                        Login
-                    </span>
-                    <span onclick="logout()">
-                        Logout
-                    </span>
-                </div>
-            </div>
-
-
-            <!--<input type="checkbox" class="theme-checkbox" checked onchange="changeTheme()">
-            <div id="div-input-search">
-
-                <img src="/img/search-icon.png" alt="search-button" class="icon">
-                <input type="search" id="search-anime" placeholder="Search Anime">
-            </div>
-
-
-
-        </div>
-    </header>
-
-    <dialog id="modalUl">
-        <ul id="modal-ul">
-            <li onclick="loadPage('signup','Signup')">
-                Signup
-            </li>
-            <li onclick="loadPage('login','Login')">
-                Login
-            </li>
-            <li onclick="logout()">
-                Logout
-            </li>
-
-        </ul>
-    </dialog> -->
-
-    <div id="app">
-
-
-
-    </div>
-
-    <script class="base-js">
-
-        function loadPage(path = "home", title = "Anime Hub", params = "") {
-            /*
-            if (sessionStorage.getItem(param) !== null) {
-                console.log(sessionStorage.getItem(param))
-                document.querySelector("#app").innerHTML = sessionStorage.getItem(param)
-                document.title = title
-
-
-                return;
+        async function loadPage(page, title) {
+            try {
+                const res = await fetch(`/${page}.html`);
+                if (!res.ok) throw new Error("Página não encontrada");
+                const html = await res.text();
+                document.querySelector("#app").innerHTML = html;
+                router.updatePageLinks();
+                document.title = title;
+            } catch (err) {
+                document.querySelector("#app").innerHTML = "<h1>Erro ao carregar página</h1>";
+                console.error(err);
             }
-            */
-
-            const url = (params) ? `/api/getHTML?p=${path}&${params}` : `/api/getHTML?p=${path}`
-            console.log(url)
-            fetch(url, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            }).then(response => {
-                if (!response.ok) {
-                    throw new Error("Erro na requisição: " + response.status);
-                }
-                return response.text();
-            })
-                .then(data => {
-
-                    document.querySelector("#app").innerHTML = data
-
-                    const urls = (path) ? path : "home"
-                    loadCSS(urls)
-                    loadJS(urls)
-                    sessionStorage.setItem(path, data)
-                    document.title = title
-                    const paramUrl = (params.includes("?")) ? params : "?" + params
-                    history.pushState({}, '', (params) ? path + `${paramUrl}` : path);
-
-                })
-
         }
 
-        document.addEventListener("DOMContentLoaded", function (event) {
-            /*
+        router
+            .on('/login', () => loadPage('login', 'Login'))
+            .on('/signup', () => loadPage('signup', 'Cadastro'))
+            .on('/home', () => loadPage('home', 'Home'))
+            .on('/initial', () => loadPage('initial', 'Initial'))
+            .notFound(() => document.querySelector("#app").innerHTML = "<h1>404 - Página não encontrada</h1>");
 
-            const theme = (localStorage.getItem("theme") === "true") ? true : false
-            document.querySelector(".theme-checkbox").checked = theme
-            changeTheme()
-            */
-
-            const path = (window.location.pathname !== "/") ? window.location.pathname : "/Home";
-            const searchParams = window.location.search;
-            const path_param = path.slice(1);
-
-            const title = path_param.replaceAll("/", " ")
-            loadPage(path_param, title, searchParams)
-        });
-
-
-        function loadCSS(url) {
-            const link = document.createElement("link");
-            link.rel = "stylesheet";
-            link.href = "/css/" + url + ".css";
-            link.type = "text/css";
-            document.head.appendChild(link);
-
-        }
-        function loadJS(url) {
-            document.querySelectorAll('script').forEach(script => {
-                if (!script.classList.contains('base-js')) {
-                    script.remove();
-                }
-            });
-
-            const script = document.createElement("script");
-            script.src = "/js/" + url + ".js";
-            script.type = "text/javascript";
-
-            document.body.appendChild(script);
-
-
-        }
-
+        // 🚀 ao abrir, já vai direto para /login
+        router.navigate('/initial');
+        router.resolve();
     </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </body>
 
 </html>
