@@ -19,15 +19,14 @@ app.get("/", (req, res) => {
   res.send("Página inicial");
 });
 
-// 🔹 servir frontend estático
 app.use(express.static(path.join(__dirname, "../frontend")));
 
-// 🔹 fallback para SPA (index.html)
+
 app.get("/html", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
-// 🔹 APIs
+
 app.use("/user", userRouter);
 app.use("/matter", matterRouter);
 app.use("/lesson", lessonRouter);

@@ -20,12 +20,14 @@
         const router = new Navigo('/');
 
 
-        async function loadPage(page, title) {
+        async function loadPage(page, title = 'estudadores.edu') {
             try {
                 const res = await fetch(`/${page}.html`);
                 if (!res.ok) throw new Error("Página não encontrada");
                 const html = await res.text();
                 document.querySelector("#app").innerHTML = html;
+                loadCSS(page)
+                loadJS(page)
                 router.updatePageLinks();
                 document.title = title;
             } catch (err) {
@@ -34,11 +36,27 @@
             }
         }
 
+        function loadCSS(page) {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = "/static/css/" + page + ".css"; 
+            link.type = "text/css";
+            document.head.appendChild(link);
+        }
+
+        function loadJS(page) {
+            const script = document.createElement("script");
+            script.src = "/static/js/" + page + ".js";
+            script.type = "text/javascript";
+            document.body.appendChild(script);
+        }
+
+
         router
-            .on('/login', () => loadPage('login', 'Login'))
-            .on('/signup', () => loadPage('signup', 'Cadastro'))
-            .on('/home', () => loadPage('home', 'Home'))
-            .on('/initial', () => loadPage('initial', 'Initial'))
+            .on('/login', () => loadPage('login'))
+            .on('/signup', () => loadPage('signup'))
+            .on('/home', () => loadPage('home'))
+            .on('/initial', () => loadPage('initial'))
             .notFound(() => document.querySelector("#app").innerHTML = "<h1>404 - Página não encontrada</h1>");
 
         // 🚀 ao abrir, já vai direto para /login
