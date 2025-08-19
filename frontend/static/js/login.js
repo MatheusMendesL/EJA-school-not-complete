@@ -22,7 +22,6 @@ form.addEventListener('submit', (e) => {
     .then(data => {
         if(data.status === 'success'){
             localStorage.setItem('token', data.data.token)
-            console.log(localStorage.getItem('token'))
             router.navigate('/home')
         }
     })
