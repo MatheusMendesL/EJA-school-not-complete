@@ -1,75 +1,65 @@
-<body class="bg-gray-100 min-h-screen flex flex-col">
-  <header class="p-6">
-    <a onclick="router.navigate('/initial')" class="inline-flex items-center text-gray-600 text-sm font-normal hover:underline cursor-pointer">
-      <i class="fas fa-arrow-left mr-2"></i>
+<body class="bg-gray-100 min-vh-75 d-flex flex-column">
+  <header class="p-4">
+    <a href="#" class="d-inline-flex align-items-center text-secondary text-sm fw-normal text-decoration-none"
+      onclick="event.preventDefault(); router.navigate('/initial');">
+      <i class="fas fa-arrow-left me-2"></i>
       Voltar
     </a>
   </header>
 
-  <main class="flex-grow flex justify-center items-center px-4">
-    <form
-      class="bg-white rounded-lg border border-gray-300 w-full max-w-md p-8"
-      aria-label="Criar sua conta"
-      autocomplete="off"
-    >
-      <h1 class="text-center text-gray-900 text-lg font-semibold mb-2">
+  <main class="flex-grow-1 d-flex justify-content-center align-items-center px-4">
+    <form class="bg-white rounded-3 border border-gray p-3 w-100" style="max-width: 448px;" aria-label="Criar sua conta"
+      autocomplete="off">
+      <h1 class="text-center text-dark fs-5 fw-semibold mb-2">
         Criar sua conta
       </h1>
-      <p class="text-center text-gray-500 mb-8">
+      <p class="text-center text-secondary mb-5">
         Comece sua jornada de aprendizado
       </p>
 
-      <label for="nome" class="block text-gray-900 font-semibold text-sm mb-1">
-        Nome completo
-      </label>
-      <input
-        id="nome"
-        name="nome"
-        type="text"
-        placeholder="Digite seu nome"
-        class="w-full mb-6 text-gray-500 text-sm placeholder-gray-400 border border-transparent focus:border-gray-300 rounded px-3 py-2 outline-none"
-      />
-
-      <label for="email" class="block text-gray-900 font-semibold text-sm mb-1">
-        E-mail ou telefone
-      </label>
-      <input
-        id="email"
-        name="email"
-        type="text"
-        placeholder="Digite seu e-mail"
-        class="w-full mb-6 text-gray-500 text-sm placeholder-gray-400 border border-transparent focus:border-gray-300 rounded px-3 py-2 outline-none"
-      />
-
-      <label for="senha" class="block text-gray-900 font-semibold text-sm mb-1">
-        Senha
-      </label>
-      <div class="relative mb-6">
-        <input
-          id="senha"
-          name="senha"
-          type="password"
-          placeholder="Digite sua senha"
-          class="w-full text-gray-500 text-sm placeholder-gray-400 border border-transparent focus:border-gray-300 rounded px-3 py-2 pr-10 outline-none"
-        />
-        <i
-          class="far fa-eye absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm cursor-pointer"
-          aria-hidden="true"
-        ></i>
+      <div class="mb-4">
+        <label for="nome" class="form-label text-dark fw-semibold fs-7 mb-1">
+          Nome completo
+        </label>
+        <input id="nome" name="name" type="text" placeholder="Digite seu nome"
+          class="form-control text-secondary fs-7 placeholder-gray-400 border border-transparent rounded-1 py-2 px-3 outline-none">
       </div>
 
-      <button
-        type="submit"
-        class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold text-sm rounded-md py-3 mb-8"
-      >
+      <div class="mb-4">
+        <label for="tel" class="form-label text-dark fw-semibold fs-7 mb-1">
+          Telefone
+        </label>
+        <input id="tel" name="tel" type="tel" placeholder="Digite seu telefone"
+          class="form-control text-secondary fs-7 placeholder-gray-400 border border-transparent rounded-1 py-2 px-3 outline-none">
+      </div>
+
+      <div class="mb-4">
+        <label for="email" class="form-label text-dark fw-semibold fs-7 mb-1">
+          E-mail
+        </label>
+        <input id="email" name="email" type="text" placeholder="Digite seu e-mail"
+          class="form-control text-secondary fs-7 placeholder-gray-400 border border-transparent rounded-1 py-2 px-3 outline-none">
+      </div>
+
+      <div class="mb-4">
+        <label for="senha" class="form-label text-dark fw-semibold fs-7 mb-1">
+          Senha
+        </label>
+        <div class="position-relative">
+          <input id="senha" name="password" type="password" placeholder="Digite sua senha"
+            class="form-control text-secondary fs-7 placeholder-gray-400 border border-transparent rounded-1 py-2 px-3 pr-5 outline-none">
+          <i class="far fa-eye position-absolute end-0 top-50 translate-middle-y text-secondary fs-7 me-3 cursor-pointer"
+            aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <button type="submit" class="w-100 btn btn-green fw-semibold fs-7 rounded-3 py-2 mb-2">
         Criar Conta
       </button>
 
-      <p class="text-center text-gray-500 text-xs mb-1">Já tem uma conta?</p>
-      <p
-        class="text-center text-green-600 text-xs font-semibold cursor-pointer"
-        onclick="router.navigate('/login')"
-      >
+      <p class="text-center text-secondary fs-8 mb-1">Já tem uma conta?</p>
+      <p class="text-center text-green-600 fs-8 fw-semibold cursor-pointer"
+        onclick="event.preventDefault(); router.navigate('/login')">
         Fazer login
       </p>
     </form>

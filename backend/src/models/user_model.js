@@ -37,6 +37,7 @@ function signup(data) {
         resolve({
           query_sql,
           affectedRows: results.affectedRows,
+          insertId: results.insertId
         });
       }
     );

@@ -6,6 +6,7 @@
     <title>Estudadores</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./static/bootstrap/bootstrap.min.css">
 
 </head>
 
@@ -38,9 +39,6 @@
         }
 
         function loadCSS(page) {
-            if (pages.includes(page)) {
-                return
-            }
             const link = document.createElement("link");
             link.rel = "stylesheet";
             link.href = "/static/css/" + page + ".css";
@@ -66,11 +64,15 @@
             .on('/initial', () => loadPage('initial'))
             .notFound(() => document.querySelector("#app").innerHTML = "<h1>404 - Página não encontrada</h1>");
 
-        // 🚀 ao abrir, já vai direto para /login
-        router.navigate('/initial');
+        if (!localStorage.getItem('token')) {
+            router.navigate('/initial')
+        } else {
+            router.navigate('/home')
+        }
+        
         router.resolve();
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./static/bootstrap/bootstrap.bundle.min.js"></script>
 
 </body>
 

@@ -1,0 +1,28 @@
+body {
+    background-color: #f4f5f5;
+}
+
+.bg-main-green {
+    background-color: #00bb8f;
+}
+
+.bg-light-green {
+    background-color: #d9f0ea;
+}
+
+.text-main-green {
+    color: #00bb8f;
+}
+
+.border-main-green {
+    border-color: #00bb8f !important;
+}
+
+.btn-main-green {
+    background-color: #00bb8f;
+    color: white;
+}
+
+.btn-main-green:hover {
+    background-color: #00a97a;
+}

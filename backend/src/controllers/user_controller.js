@@ -40,14 +40,17 @@ async function signup(req, res) {
   try {
     // me retorna o que a promise resolveu, no caso a query e as linhas afetadas, dps executa minha função
     // e espera o retorno da função
-    const { query_sql, affectedRows } = await functionsModel.signup(data);
+    const { query_sql, affectedRows, insertId } = await functionsModel.signup(data);
+    
+    if (!insertId) return res.status(500).json({ status: "error", message: "Erro ao criar usuário" });
+    const token = jwt.sign({ id: insertId }, SECRET_KEY, { expiresIn: "7d" });
     res.json(
       response(
         "success",
         "User added successfully",
         query_sql,
         affectedRows,
-        null
+        token
       )
     );
   } catch (error) {

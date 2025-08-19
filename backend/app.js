@@ -16,13 +16,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.send("Página inicial");
-});
-
-app.use(express.static(path.join(__dirname, "../frontend")));
-
-
-app.get("/html", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
@@ -31,5 +24,7 @@ app.use("/user", userRouter);
 app.use("/matter", matterRouter);
 app.use("/lesson", lessonRouter);
 app.use("/task", taskRouter);
+
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 module.exports = app;

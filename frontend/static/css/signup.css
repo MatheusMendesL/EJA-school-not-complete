@@ -1,0 +1,23 @@
+body {
+    background-color: #f3f4f6;
+    font-family: sans-serif;
+}
+
+.form-control:focus {
+    border-color: #d1d5db;
+    box-shadow: none;
+}
+
+.btn-green {
+    background-color: #22c55e;
+    color: white;
+}
+
+.btn-green:hover {
+    background-color: #16a34a;
+    color: white;
+}
+
+.text-green-600 {
+    color: #16a34a;
+}

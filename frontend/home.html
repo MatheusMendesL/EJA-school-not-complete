@@ -1,1 +1,172 @@
-teste
+<body class="bg-[#f5f6f6] font-sans text-[13px] text-[#4a4a4a] min-h-screen d-flex justify-content-center align-items-center py-5">
+  <main class="container">
+    <header class="d-flex justify-content-between align-items-center mb-3">
+      <div>
+        <h1 class="fw-semibold fs-6 text-dark">Olá, Usuário!</h1>
+        <p class="fs-7 text-secondary">Continue seus estudos de onde parou</p>
+      </div>
+      <div class="d-flex align-items-center gap-1 fs-7 text-dark-emphasis cursor-pointer">
+        <i class="fas fa-user fs-6"></i>
+        <span>Perfil</span>
+      </div>
+    </header>
+
+    <section class="bg-white rounded-3 border border-gray p-4 mb-4">
+      <div class="d-flex justify-content-between align-items-start mb-2">
+        <div class="d-flex align-items-center gap-3">
+          <div class="d-flex align-items-center justify-content-center text-white rounded-circle"
+            style="width: 40px; height: 40px; background-color: #00b386;">
+            <i class="fas fa-star fs-6"></i>
+          </div>
+          <div>
+            <p class="fw-semibold fs-6 text-dark mb-0">Nível 3</p>
+            <p class="fs-7 text-secondary mb-0">750 XP</p>
+          </div>
+        </div>
+        <div
+          class="d-flex align-items-center gap-1 fs-8 text-main-green border border-main-green rounded-pill px-2 py-1">
+          <i class="fas fa-trophy"></i>
+          <span>Em progresso</span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center fs-7 text-dark-emphasis mb-1">
+        <span>Progresso para o próximo nível</span>
+        <span>750/1000 XP</span>
+      </div>
+      <progress max="1000" value="750" class="w-100 rounded-pill"></progress>
+    </section>
+
+    <section class="bg-white rounded-3 border border-gray p-4 mb-4">
+      <div class="d-flex align-items-center gap-2 fs-7 text-main-green mb-3">
+        <i class="fas fa-play-circle fs-6"></i>
+        <span>Continuar estudando</span>
+      </div>
+      <div class="bg-main-light-green rounded-3 p-3 d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <div class="rounded-3 d-flex align-items-center justify-content-center text-main-green"
+            style="width: 40px; height: 40px; background-color: #aef0df;">
+            <i class="fas fa-book-open fs-6"></i>
+          </div>
+          <div>
+            <p class="fw-semibold fs-6 text-dark mb-0">Português</p>
+            <p class="fs-7 text-secondary mb-0">Lição 9 de 12</p>
+          </div>
+        </div>
+        <button class="btn btn-success fs-7 fw-semibold rounded-pill px-3 py-1" type="button">
+          Continuar
+        </button>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="fw-semibold fs-6 text-dark mb-3">Suas trilhas</h2>
+      <div class="row g-4">
+        <article class="col-sm-6">
+          <div class="card p-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+              <div class="d-flex align-items-center justify-content-center rounded-3 text-portugues bg-portugues"
+                style="width: 40px; height: 40px;">
+                <i class="fas fa-book-open fs-6"></i>
+              </div>
+              <div>
+                <p class="fw-semibold fs-6 text-dark mb-0">Português</p>
+                <p class="fs-7 text-secondary mb-0">8 de 12 lições</p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center fs-7 text-dark-emphasis mb-1">
+              <span>Progresso</span>
+              <span>65%</span>
+            </div>
+            <div class="progress mb-3" role="progressbar" aria-label="Progresso de Português" aria-valuenow="65"
+              aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar" style="width: 65%; background-color: #4a6fff;"></div>
+            </div>
+            <button class="btn btn-outline-secondary w-100 fs-7 py-1" type="button">
+              Continuar
+            </button>
+          </div>
+        </article>
+
+        <article class="col-sm-6">
+          <div class="card p-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+              <div class="d-flex align-items-center justify-content-center rounded-3 text-matematica bg-matematica"
+                style="width: 40px; height: 40px;">
+                <i class="fas fa-calculator fs-6"></i>
+              </div>
+              <div>
+                <p class="fw-semibold fs-6 text-dark mb-0">Matemática</p>
+                <p class="fs-7 text-secondary mb-0">7 de 15 lições</p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center fs-7 text-dark-emphasis mb-1">
+              <span>Progresso</span>
+              <span>45%</span>
+            </div>
+            <div class="progress mb-3" role="progressbar" aria-label="Progresso de Matemática" aria-valuenow="45"
+              aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar" style="width: 45%; background-color: #3ca34d;"></div>
+            </div>
+            <button class="btn btn-outline-secondary w-100 fs-7 py-1" type="button">
+              Continuar
+            </button>
+          </div>
+        </article>
+
+        <article class="col-sm-6">
+          <div class="card p-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+              <div class="d-flex align-items-center justify-content-center rounded-3 text-historia bg-historia"
+                style="width: 40px; height: 40px;">
+                <i class="fas fa-globe fs-6"></i>
+              </div>
+              <div>
+                <p class="fw-semibold fs-6 text-dark mb-0">História</p>
+                <p class="fs-7 text-secondary mb-0">3 de 10 lições</p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center fs-7 text-dark-emphasis mb-1">
+              <span>Progresso</span>
+              <span>30%</span>
+            </div>
+            <div class="progress mb-3" role="progressbar" aria-label="Progresso de História" aria-valuenow="30"
+              aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar progress-historia" style="width: 30%;"></div>
+            </div>
+            <button class="btn btn-outline-secondary w-100 fs-7 py-1" type="button">
+              Continuar
+            </button>
+          </div>
+        </article>
+
+        <article class="col-sm-6">
+          <div class="card p-4">
+            <div class="d-flex align-items-center gap-3 mb-2">
+              <div class="d-flex align-items-center justify-content-center rounded-3 text-ciencias bg-ciencias"
+                style="width: 40px; height: 40px;">
+                <i class="fas fa-atom fs-6"></i>
+              </div>
+              <div>
+                <p class="fw-semibold fs-6 text-dark mb-0">Ciências</p>
+                <p class="fs-7 text-secondary mb-0">2 de 8 lições</p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center fs-7 text-dark-emphasis mb-1">
+              <span>Progresso</span>
+              <span>20%</span>
+            </div>
+            <div class="progress mb-3" role="progressbar" aria-label="Progresso de Ciências" aria-valuenow="20"
+              aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar progress-ciencias" style="width: 20%;"></div>
+            </div>
+            <button class="btn btn-outline-secondary w-100 fs-7 py-1" type="button">
+              Continuar
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
