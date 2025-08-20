@@ -32,13 +32,23 @@ function signup(data) {
     conn.query(
       query_sql,
       [data.name, data.email, data.tel, password],
-      (error, results) => {
+      async (error, results) => {
         if (error) return reject(error);
-        resolve({
-          query_sql,
-          affectedRows: results.affectedRows,
-          insertId: results.insertId
-        });
+        try {
+          const data_id = {
+            id: results.insertId
+          }
+          const data_user = await get_user_data(data_id)
+          resolve({
+            query_sql,
+            affectedRows: results.affectedRows,
+            data: data_user,
+            insertId: results.insertId
+          });
+        } catch(error) {
+          reject(error)
+        }
+        
       }
     );
   });
