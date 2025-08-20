@@ -22,7 +22,7 @@ Students earn points and there is a global ranking.
 ---
 
 ## How to start the project
-# To run this project you NEED to configure the .env or put your configurations
+### To run this project you NEED to configure the .env or put your configurations
 
 Open your terminal and run the following commands:
 
