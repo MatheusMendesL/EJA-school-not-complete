@@ -1,28 +1,55 @@
-Para rodar o docker, desistir do laragon
-continuar frontend
+# Estudadores.edu
+*A platform for adult education (EJA) for users over 18 years old*
 
-## Estudadores.edu
-*Uma plataforma sobre um EJA para maiores de 18 anos*
+## Introduction
+This platform allows adults to complete exercises in the subjects they want.  
+Students earn points and there is a global ranking.
 
-## Introdução
-É uma plataforma onde os adultos iriam fazer exercícios para as matérias que eles desejam.
-Os alunos tem uma pontuação e um ranking geral.
-
-- Autenticação com JWT.
-- API em NODE.
-- Frontend com JS.
+- Authentication with JWT
+- API in Node.js
+- Frontend in JavaScript
 
 ---
 
 ## Stack
 
-- **Frontend**: HTML, CSS, JS.
-- **Backend**: API em NODE.
-- **Autenticação**: JWT.
+- **Frontend**: HTML, CSS, JS
+- **Backend**: Node.js API
+- **Authentication**: JWT
 
 ---
 
-## Estrutura do projeto
+## How to start the project
 
-- **Estrutura Backend**: Servidor Node com a API, autenticação e controle da API.
-- **Estrutura Frontend**: Toda a estrutura para pegar o retorno da API e a parte do layout.
+Open your terminal and run the following commands:
+
+```bash
+# Clone the repository
+git clone https://github.com/MatheusMendesL/EJA-school
+
+# Enter the project folder
+cd EJA-school
+
+# Enter the backend folder
+cd backend
+
+# Install dependencies
+npm install
+
+# Start the backend server
+node server.js
+
+```
+# Docker commands 
+if you want to run with docker, use this commands
+```bash
+# First you need to configure the .env of the project with the data od the server
+# After that you need to remove the comments in the /backend/src/config/config_sql.js
+
+# And you can create the image
+docker build -t estudadores-backend ./backend
+
+# Now you can start the system
+docker-compose up -d
+```
+
