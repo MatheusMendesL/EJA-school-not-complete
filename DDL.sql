@@ -1,4 +1,4 @@
--- Tabela dos usuários
+-- Users table
 CREATE TABLE users (
     id_user INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -10,14 +10,14 @@ CREATE TABLE users (
     created_at DATETIME NOT NULL
 );
 
--- Tabela de matérias
+-- Matters table
 CREATE TABLE matter (
     id_matter INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE,   
     description TEXT                      
 );
 
--- Tabela de lições
+-- Lessons table
 CREATE TABLE lesson (
     id_lesson INT AUTO_INCREMENT PRIMARY KEY,
     matter_id INT NOT NULL,                
@@ -29,7 +29,7 @@ CREATE TABLE lesson (
     FOREIGN KEY (matter_id) REFERENCES matter(id_matter) ON DELETE CASCADE
 );
 
--- Tabela de tarefas (perguntas de múltipla escolha)
+-- Tasks table
 CREATE TABLE task (
     id_task INT AUTO_INCREMENT PRIMARY KEY,
     lesson_id INT NOT NULL,              
@@ -44,6 +44,7 @@ CREATE TABLE task (
     FOREIGN KEY (lesson_id) REFERENCES lesson(id_lesson) ON DELETE CASCADE
 );
 
+-- User progress table
 CREATE TABLE user_progress (
     id_progress INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT NOT NULL,

@@ -1,3 +1,5 @@
+-- I didnt finished the docker yet
+
 # Estudadores.edu
 *A platform for adult education (EJA) for users over 18 years old*
 

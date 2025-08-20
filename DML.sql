@@ -1,4 +1,6 @@
 -- Inserir matérias
+-- Matters 
+
 INSERT INTO matter (name, description) VALUES
 ('Português', 'Estudo da língua portuguesa, literatura e análise textual avançada.'),
 ('Matemática', 'Estudo de álgebra, geometria, funções e estatística avançada.'),
@@ -7,6 +9,7 @@ INSERT INTO matter (name, description) VALUES
 ('Geografia', 'Geografia física e humana com estudo de processos globais.');
 
 
+-- Themes
 -- PORTUGUÊS
 
 INSERT INTO lesson (matter_id, title, content, level, created_at, updated_at) VALUES
@@ -91,6 +94,8 @@ INSERT INTO lesson (matter_id, title, content, level, created_at, updated_at) VA
 (5, 'Geografia Humana Avançada', 'Urbanização, migrações e planejamento urbano.', 'avançado', NOW(), NOW()),
 (5, 'Desenvolvimento Regional e Territorial', 'Disparidades econômicas e políticas públicas.', 'avançado', NOW(), NOW());
 
+
+-- Questions
 
 INSERT INTO task (lesson_id, question, option_a, option_b, option_c, option_d, correct_answer, created_at, updated_at) VALUES
 -- PORTUGUÊS - lesson_id 1: Fonética e Fonologia Avançada
