@@ -1,13 +1,14 @@
-<body class="bg-[#f5f6f6] font-sans text-[13px] text-[#4a4a4a] min-h-screen d-flex justify-content-center align-items-center py-5">
+<body
+  class="bg-[#f5f6f6] font-sans text-[13px] text-[#4a4a4a] min-h-screen d-flex justify-content-center align-items-center py-5">
   <main class="container">
     <header class="d-flex justify-content-between align-items-center mb-3">
       <div>
-        <h1 class="fw-semibold fs-6 text-dark">Olá, Usuário!</h1>
+        <h1 class="fw-semibold fs-6 text-dark">Olá, <span id="name"></span></h1>
         <p class="fs-7 text-secondary">Continue seus estudos de onde parou</p>
       </div>
       <div class="d-flex align-items-center gap-1 fs-7 text-dark-emphasis cursor-pointer">
         <i class="fas fa-user fs-6"></i>
-        <span>Perfil</span>
+        <span id="profile">Perfil</span>
       </div>
     </header>
 
@@ -19,8 +20,8 @@
             <i class="fas fa-star fs-6"></i>
           </div>
           <div>
-            <p class="fw-semibold fs-6 text-dark mb-0">Nível 3</p>
-            <p class="fs-7 text-secondary mb-0">750 XP</p>
+            <p class="fw-semibold fs-6 text-dark mb-0">Nível <span id="level"></span></p>
+            <p class="fs-7 text-secondary mb-0"><span id="xp"></span> XP</p>
           </div>
         </div>
         <div
@@ -31,7 +32,7 @@
       </div>
       <div class="d-flex justify-content-between align-items-center fs-7 text-dark-emphasis mb-1">
         <span>Progresso para o próximo nível</span>
-        <span>750/1000 XP</span>
+        <span><span id="xp"></span>/1000 XP</span>
       </div>
       <progress max="1000" value="750" class="w-100 rounded-pill"></progress>
     </section>
@@ -39,7 +40,7 @@
     <section class="bg-white rounded-3 border border-gray p-4 mb-4">
       <div class="d-flex align-items-center gap-2 fs-7 text-main-green mb-3">
         <i class="fas fa-play-circle fs-6"></i>
-        <span>Continuar estudando</span>
+        <span>Suas trilhas</span>
       </div>
       <div class="bg-main-light-green rounded-3 p-3 d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center gap-3">
@@ -48,7 +49,7 @@
             <i class="fas fa-book-open fs-6"></i>
           </div>
           <div>
-            <p class="fw-semibold fs-6 text-dark mb-0">Português</p>
+            <p class="fw-semibold fs-6 text-dark mb-0" id="matter_name">Português</p>
             <p class="fs-7 text-secondary mb-0">Lição 9 de 12</p>
           </div>
         </div>
@@ -87,7 +88,7 @@
           </div>
         </article>
 
-        <article class="col-sm-6">
+        <article class="col-sm-6 matter">
           <div class="card p-4">
             <div class="d-flex align-items-center gap-3 mb-2">
               <div class="d-flex align-items-center justify-content-center rounded-3 text-matematica bg-matematica"
