@@ -29,7 +29,7 @@ body {
     min-height: 100vh;
 }
 
-/* Cores de fundo e texto para os cards */
+
 .bg-main-light-green {
     background-color: #d9f6f0;
 }
@@ -46,7 +46,7 @@ body {
     border-color: #00b386 !important;
 }
 
-/* Cores de fundo e texto para os ícones dos cards */
+
 .bg-portugues {
     background-color: #c7d9ff;
 }
