@@ -1,24 +1,15 @@
 /* localStorage.clear() */
 
-const user = localStorage.getItem("user");
+const userStorage = localStorage.getItem("user");
 const token = localStorage.getItem("token")
-const user_data = JSON.parse(user)
+const user_data = JSON.parse(userStorage)
 
 document.querySelector("#name").textContent = user_data[0].name;
-
-document.querySelector("#profile").addEventListener("click", () => {
-  const id_user = user_data[0].id_user; // mudar qq q coisa p o certo
-  const codified_id = btoa(id_user);
-  router.navigate(`/profile?id=${codified_id}`);
-});
-
 document.querySelector("#level").textContent = user_data[0].ranking;
 document.querySelectorAll("#xp").forEach(e => { e.textContent = user_data[0].xp; })
-
 document.querySelector('progress').value = user_data[0].xp
 
 // matters
-
 fetch("matter/get_matters", {
   method: "GET",
   headers: {
@@ -32,9 +23,6 @@ fetch("matter/get_matters", {
   })
   .then((data) => {
     if (data.status == "success") {
-      // passar p dentro de cada materia
-      // ver dps os dados
-
       const colors_background = {
         Português: "#e74c3c;",
         Matemática: " #3498db",
@@ -44,34 +32,31 @@ fetch("matter/get_matters", {
       }
 
       const colors = {
-        Português: "#fff",     
-        Matemática: "#fff",     
-        Ciências: "#fff",       
-        História: "#fff",       
-        Geografia: "#fff",     
+        Português: "#fff",
+        Matemática: "#fff",
+        Ciências: "#fff",
+        História: "#fff",
+        Geografia: "#fff",
       };
 
       const icons = {
-        Português: "fas fa-book-open fs-6",      
-        Matemática: "fas fa-calculator fs-6",     
-        Ciências: "fas fa-atom fs-6",       
-        História: "fas fa-landmark fs-6",       
-        Geografia: "fas fa-globe fs-6", 
+        Português: "fas fa-book-open fs-6",
+        Matemática: "fas fa-calculator fs-6",
+        Ciências: "fas fa-atom fs-6",
+        História: "fas fa-landmark fs-6",
+        Geografia: "fas fa-globe fs-6",
       }
 
-
-      // passar as cores p um array pra ficar mais bonito, ai dependendo doq vier ele retorna a cor
       const data_matters = data.data;
       data_matters.forEach((matter) => {
         const section = document.querySelector('.sec-matters')
         const card_matter = document.createElement('article')
         card_matter.classList.add('col-sm-6')
         card_matter.innerHTML = `
-        
           <div class="card p-4">
             <div class="d-flex align-items-center gap-3 mb-2">
               <div class="d-flex align-items-center justify-content-center rounded-3"
-                style="width: 40px; height: 40px; background-color:${colors_background[matter.name]}; color:${colors[matter.name]};  ">
+                style="width: 40px; height: 40px; background-color:${colors_background[matter.name]}; color:${colors[matter.name]};">
                 <i class="${icons[matter.name]}"></i>
               </div>
               <div>
@@ -87,13 +72,20 @@ fetch("matter/get_matters", {
               aria-valuemin="0" aria-valuemax="100">
               <div class="progress-bar" style="width: 45%; ${colors[matter.name]};"></div>
             </div>
-            <button class="btn btn-outline-secondary w-100 fs-7 py-1" type="button">
-              Continuar
+            <button class="btnLesson btn btn-outline-secondary w-100 fs-7 py-1" type="button">
+              Fazer lições
             </button>
           </div>
-            `;
+        `;
+
+        // pega o botão dentro do card recém-criado
+        const btn = card_matter.querySelector('.btnLesson');
+        btn.addEventListener('click', () => {
+          const id = btoa(matter.id_matter);
+          router.navigate('/lessons?' + id);
+        });
+
         section.appendChild(card_matter)
       });
-
     }
   });

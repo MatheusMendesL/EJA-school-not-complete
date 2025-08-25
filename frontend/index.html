@@ -50,6 +50,10 @@
             if (pages.includes(page)) {
                 return
             }
+
+            if (document.querySelector(`script[src="/static/js/${page}.js"]`)) {
+                return;
+            }
             const script = document.createElement("script");
             script.src = "/static/js/" + page + ".js";
             script.type = "text/javascript";
@@ -62,6 +66,7 @@
             .on('/signup', () => loadPage('signup'))
             .on('/home', () => loadPage('home'))
             .on('/initial', () => loadPage('initial'))
+            .on('/lessons', () => loadPage('lessons'))
             .notFound(() => document.querySelector("#app").innerHTML = "<h1>404 - Página não encontrada</h1>");
 
         if (!localStorage.getItem('token')) {
@@ -69,7 +74,7 @@
         } else {
             router.navigate('/home')
         }
-        
+
         router.resolve();
     </script>
     <script src="./static/bootstrap/bootstrap.bundle.min.js"></script>
