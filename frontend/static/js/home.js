@@ -1,80 +1,80 @@
 /* localStorage.clear() */
+async function exec() {
+  const userStorage = localStorage.getItem("user");
+  const token = localStorage.getItem("token");
+  const user_data = JSON.parse(userStorage);
 
-const userStorage = localStorage.getItem("user");
-const token = localStorage.getItem("token");
-const user_data = JSON.parse(userStorage);
-
-document.querySelector("#name").textContent = user_data[0].name;
-document.querySelector("#level").textContent = user_data[0].ranking;
-document.querySelectorAll("#xp").forEach((e) => {
-  e.textContent = user_data[0].xp;
-});
-document.querySelector("progress").value = user_data[0].xp;
-
-// mudar rota do fetch
-const progressUser = await fetch("urlApi/idUser", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  },
-})
-  .then((response) => {
-    if (response.status == 200) return response.json();
-    throw new Error("Erro ao pegar os dados: " + response.status);
-  })
-  .then((data) => {
-    //p testa
-    console.log(data);
+  document.querySelector("#name").textContent = user_data[0].name;
+  document.querySelector("#level").textContent = user_data[0].ranking;
+  document.querySelectorAll("#xp").forEach((e) => {
+    e.textContent = user_data[0].xp;
   });
+  document.querySelector("progress").value = user_data[0].xp;
 
-// testar se funciona
-console.log(progressUser);
-
-// matters
-fetch("matter/get_matters", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  },
-})
-  .then((response) => {
-    if (response.status == 200) return response.json();
-    throw new Error("Erro ao pegar os dados: " + response.status);
+  // mudar rota do fetch
+  const progressUser = await fetch("urlApi/idUser", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   })
-  .then((data) => {
-    if (data.status == "success") {
-      const colors_background = {
-        Português: "#e74c3c;",
-        Matemática: " #3498db",
-        Ciências: " #2ecc71",
-        História: " #8e5e3f",
-        Geografia: "#f39c12",
-      };
+    .then((response) => {
+      if (response.status == 200) return response.json();
+      throw new Error("Erro ao pegar os dados: " + response.status);
+    })
+    .then((data) => {
+      //p testa
+      console.log(data);
+    });
 
-      const colors = {
-        Português: "#fff",
-        Matemática: "#fff",
-        Ciências: "#fff",
-        História: "#fff",
-        Geografia: "#fff",
-      };
+  // testar se funciona
+  console.log(progressUser);
 
-      const icons = {
-        Português: "fas fa-book-open fs-6",
-        Matemática: "fas fa-calculator fs-6",
-        Ciências: "fas fa-atom fs-6",
-        História: "fas fa-landmark fs-6",
-        Geografia: "fas fa-globe fs-6",
-      };
+  // matters
+  fetch("matter/get_matters", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      if (response.status == 200) return response.json();
+      throw new Error("Erro ao pegar os dados: " + response.status);
+    })
+    .then((data) => {
+      if (data.status == "success") {
+        const colors_background = {
+          Português: "#e74c3c;",
+          Matemática: " #3498db",
+          Ciências: " #2ecc71",
+          História: " #8e5e3f",
+          Geografia: "#f39c12",
+        };
 
-      const data_matters = data.data;
-      data_matters.forEach((matter) => {
-        const section = document.querySelector(".sec-matters");
-        const card_matter = document.createElement("article");
-        card_matter.classList.add("col-sm-6");
-        card_matter.innerHTML = `
+        const colors = {
+          Português: "#fff",
+          Matemática: "#fff",
+          Ciências: "#fff",
+          História: "#fff",
+          Geografia: "#fff",
+        };
+
+        const icons = {
+          Português: "fas fa-book-open fs-6",
+          Matemática: "fas fa-calculator fs-6",
+          Ciências: "fas fa-atom fs-6",
+          História: "fas fa-landmark fs-6",
+          Geografia: "fas fa-globe fs-6",
+        };
+
+        const data_matters = data.data;
+        data_matters.forEach((matter) => {
+          const section = document.querySelector(".sec-matters");
+          const card_matter = document.createElement("article");
+          card_matter.classList.add("col-sm-6");
+          card_matter.innerHTML = `
           <div class="card p-4">
             <div class="d-flex align-items-center gap-3 mb-2">
               <div class="d-flex align-items-center justify-content-center rounded-3"
@@ -106,14 +106,15 @@ fetch("matter/get_matters", {
           </div>
         `;
 
-        // pega o botão dentro do card recém-criado
-        const btn = card_matter.querySelector(".btnLesson");
-        btn.addEventListener("click", () => {
-          const id = btoa(matter.id_matter);
-          router.navigate("/lessons?id=" + id);
-        });
+          // pega o botão dentro do card recém-criado
+          const btn = card_matter.querySelector(".btnLesson");
+          btn.addEventListener("click", () => {
+            const id = btoa(matter.id_matter);
+            router.navigate("/lessons?id=" + id);
+          });
 
-        section.appendChild(card_matter);
-      });
-    }
-  });
+          section.appendChild(card_matter);
+        });
+      }
+    });
+}
