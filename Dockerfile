@@ -21,3 +21,4 @@ EXPOSE 3000
 
 # Comando para iniciar o backend em modo desenvolvimento
 CMD ["npm", "run", "dev"]
+
