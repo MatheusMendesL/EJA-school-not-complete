@@ -13,3 +13,38 @@ const { response } = require("../utils/functions");
     FOREIGN KEY (lesson_id) REFERENCES lesson(id_lesson) ON DELETE CASCADE,
     FOREIGN KEY (matter_id) REFERENCES matter(id_matter) ON DELETE CASCADE
 ); */
+
+
+async function get_progress_by_matter(req, res) {
+    const matter_id = req.params.matter
+    const id_user = req.params.id
+
+    const get_data = {
+        matter_id,
+        id_user
+    }
+
+    try {
+        const { query_sql, affectedRows, data } = await functionsModel.get_progress(get_data)
+        res.json(
+            response(
+                "success",
+                "Got user data successfully",
+                query_sql,
+                affectedRows,
+                data
+            )
+        );
+    } catch (error) {
+        res.status(500).json(response("error", error.message, null, 0, null));
+    }
+}
+
+async function get_progress_by_matter_id(req, res) {
+
+}
+
+module.exports = {
+    get_progress_by_matter,
+    get_progress_by_matter_id
+}
