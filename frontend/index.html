@@ -20,7 +20,12 @@
 
         const router = new Navigo('/');
         // pages that not is necessary the js and css
+        
         const pages = ['initial']
+        const funs = {
+            home: () => home(),
+            lessons: () => lessons()
+        }
 
         async function loadPage(page, title = 'estudadores.edu') {
             try {
@@ -52,9 +57,11 @@
             }
 
             if (document.querySelector(`script[src="/static/js/${page}.js"]`)) {
-                exec()
+                if (funs[page]) funs[page]()
+                console.clear()
                 return;
             }
+
             const script = document.createElement("script");
             script.src = "/static/js/" + page + ".js";
             script.type = "text/javascript";

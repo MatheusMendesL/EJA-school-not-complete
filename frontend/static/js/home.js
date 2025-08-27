@@ -1,18 +1,35 @@
 /* localStorage.clear() */
-async function exec() {
+async function home() {
   const userStorage = localStorage.getItem("user");
   const token = localStorage.getItem("token");
   const user_data = JSON.parse(userStorage);
 
-  document.querySelector("#name").textContent = user_data[0].name;
-  document.querySelector("#level").textContent = user_data[0].ranking;
+  const id = user_data[0].id_user
+  const data = await fetch("user/get_user_data/" + id, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    }
+  }).then(response => {
+    if (response.status == 200) return response.json();
+    throw new Error("Erro ao pegar os dados: " + response.status);
+  }).then(data => {
+    return data
+  })
+
+  
+  const user = data.data
+
+  document.querySelector("#name").textContent = user[0].name;
+  document.querySelector("#level").textContent = user[0].ranking;
   document.querySelectorAll("#xp").forEach((e) => {
-    e.textContent = user_data[0].xp;
+    e.textContent = user[0].xp;
   });
-  document.querySelector("progress").value = user_data[0].xp;
+  document.querySelector("progress").value = user[0].xp;
 
   // mudar rota do fetch
-  const progressUser = await fetch("urlApi/idUser", {
+  /* const progressUser = await fetch("urlApi/idUser", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -29,7 +46,7 @@ async function exec() {
     });
 
   // testar se funciona
-  console.log(progressUser);
+  console.log(progressUser); */
 
   // matters
   fetch("matter/get_matters", {
@@ -78,9 +95,8 @@ async function exec() {
           <div class="card p-4">
             <div class="d-flex align-items-center gap-3 mb-2">
               <div class="d-flex align-items-center justify-content-center rounded-3"
-                style="width: 40px; height: 40px; background-color:${
-                  colors_background[matter.name]
-                }; color:${colors[matter.name]};">
+                style="width: 40px; height: 40px; background-color:${colors_background[matter.name]
+            }; color:${colors[matter.name]};">
                 <i class="${icons[matter.name]}"></i>
               </div>
               <div>
@@ -92,13 +108,11 @@ async function exec() {
               <span>Progresso</span>
               <span>Tenho que fazer</span>
             </div>
-            <div class="progress mb-3" role="progressbar" aria-label="Progresso de ${
-              matter.name
+            <div class="progress mb-3" role="progressbar" aria-label="Progresso de ${matter.name
             }" aria-valuenow="45"
               aria-valuemin="0" aria-valuemax="100">
-              <div class="progress-bar" style="width: 45%; ${
-                colors[matter.name]
-              };"></div>
+              <div class="progress-bar" style="width: 45%; ${colors[matter.name]
+            };"></div>
             </div>
             <button class="btnLesson btn btn-outline-secondary w-100 fs-7 py-1" type="button">
               Fazer lições
@@ -118,3 +132,5 @@ async function exec() {
       }
     });
 }
+
+home()
