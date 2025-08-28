@@ -1,0 +1,240 @@
+tela principal:
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Selecione ano e tema para Português</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for active states */
+        .btn-year.active,
+        .btn-topic.active {
+            background-color: #e6f6f1;
+            border-color: #15a589;
+            color: #0f6e5c;
+            font-weight: 600;
+        }
+
+        .btn-year,
+        .btn-topic {
+            border-width: 1.5px;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
+        .btn-year:hover:not(.active),
+        .btn-topic:hover:not(.active) {
+            background-color: #f5fdfb;
+            cursor: pointer;
+        }
+
+        /* Ensure focus outlines for accessibility */
+        button:focus-visible {
+            outline-offset: 3px;
+            outline: 3px solid #15a589;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex flex-col px-4 sm:px-8 py-6 font-sans text-gray-900">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="text-gray-600 text-sm mb-4 select-none">
+        <ol class="inline-flex space-x-1 md:space-x-2 font-medium">
+            <li><span>Suas trilhas</span> ›</li>
+            <li class="font-semibold text-gray-900">Português</li>
+            <li>› Ano e Tema</li>
+        </ol>
+    </nav>
+
+    <!-- Header and Voltar -->
+    <header class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-semibold leading-tight">
+            Selecione o ano e tema para Português
+        </h1>
+        <button type="button" class="text-gray-700 hover:text-gray-900 font-semibold" aria-label="Voltar">
+            ← Voltar
+        </button>
+    </header>
+
+    <!-- Container for selections -->
+    <main class="flex-grow max-w-4xl mx-auto w-full space-y-8">
+
+        <!-- 1. Select Year -->
+        <section aria-label="Selecione o ano" class="bg-white rounded-lg border border-gray-300 p-5 shadow-sm">
+            <h2 class="mb-4 text-gray-800 font-medium">Selecione o ano</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <button class="btn-year rounded-lg px-6 py-3 border border-gray-300 text-gray-800 text-center"
+                    data-year="1" aria-pressed="true">
+                    1º Ensino Médio
+                </button>
+                <button class="btn-year rounded-lg px-6 py-3 border border-gray-300 text-gray-800 text-center"
+                    data-year="2" aria-pressed="false">
+                    2º Ensino Médio
+                </button>
+                <button class="btn-year rounded-lg px-6 py-3 border border-gray-300 text-gray-800 text-center"
+                    data-year="3" aria-pressed="false">
+                    3º Ensino Médio
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. Select Topic (depends on year) -->
+        <section aria-label="Temas de Português" class="bg-white rounded-lg border border-gray-300 p-5 shadow-sm">
+            <nav aria-label="Caminho dos temas" class="mb-4 text-sm text-gray-600 select-none">
+                Temas de Português &gt; <span id="breadcrumb-year" class="font-semibold">1º Ensino Médio</span>
+            </nav>
+            <div class="grid grid-cols-1 sm:grid-cols-5 gap-4">
+                <!-- Topics inserted dynamically by JS -->
+            </div>
+        </section>
+
+        <!-- 3. Selection summary -->
+        <section aria-label="Resumo da seleção"
+            class="bg-white rounded-lg border border-gray-300 p-5 text-gray-700 shadow-sm min-h-[4rem]">
+            <p>Você selecionou: <strong id="selection-summary">Português • 1º Ensino Médio • Gramática e
+                    Ortografia</strong></p>
+        </section>
+
+        <!-- 4. Button começar lições -->
+        <button id="start-lessons-btn"
+            class="w-full bg-teal-600 hover:bg-teal-700 transition-colors text-white font-semibold py-3 rounded-md shadow-md">
+            Começar lições
+        </button>
+
+    </main>
+
+    <script>
+        (() => {
+            // Data for topics per year
+            const topicsByYear = {
+                1: [
+                    "Gramática e Ortografia",
+                    "Interpretação de Textos",
+                    "Literatura Brasileira Colonial",
+                    "Redação Narrativa",
+                    "Figuras de Linguagem"
+                ],
+                2: [
+                    "Gêneros Textuais",
+                    "Análise Sintática",
+                    "Literatura Romântica",
+                    "Redação Dissertativa",
+                    "Semântica"
+                ],
+                3: [
+                    "Linguística Aplicada",
+                    "Estilística",
+                    "Literatura Brasileira Modernista",
+                    "Redação Argumentativa",
+                    "Pragmática"
+                ]
+            };
+
+            // Elements
+            const yearButtons = document.querySelectorAll(".btn-year");
+            const topicsContainer = document.querySelector("section[aria-label='Temas de Português'] > div.grid");
+            const breadcrumbYear = document.getElementById("breadcrumb-year");
+            const selectionSummary = document.getElementById("selection-summary");
+            const startLessonsBtn = document.getElementById("start-lessons-btn");
+
+            let selectedYear = 1;
+            let selectedTopicIndex = 0;
+
+            // Render topics dynamically based on selected year
+            function renderTopics(year) {
+                const topics = topicsByYear[year];
+                topicsContainer.innerHTML = "";
+
+                topics.forEach((topic, index) => {
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.className = "btn-topic rounded-lg px-4 py-3 border border-gray-300 text-gray-800 text-center";
+                    btn.textContent = topic;
+                    btn.setAttribute("data-topic-index", index);
+                    btn.setAttribute("aria-pressed", "false");
+                    if (index === 0) {
+                        btn.classList.add("active");
+                        btn.setAttribute("aria-pressed", "true");
+                    }
+                    btn.addEventListener("click", () => {
+                        setSelectedTopic(index);
+                    });
+                    topicsContainer.appendChild(btn);
+                });
+            }
+
+            // Set selected year, update UI and reset topic to first
+            function setSelectedYear(year) {
+                if (selectedYear === year) return;
+                selectedYear = year;
+                // Update year buttons active state and aria-pressed
+                yearButtons.forEach(btn => {
+                    const y = parseInt(btn.getAttribute("data-year"), 10);
+                    if (y === year) {
+                        btn.classList.add("active");
+                        btn.setAttribute("aria-pressed", "true");
+                    } else {
+                        btn.classList.remove("active");
+                        btn.setAttribute("aria-pressed", "false");
+                    }
+                });
+                // Update breadcrumb year text
+                breadcrumbYear.textContent = `${year}º Ensino Médio`;
+
+                // Reset and render topics for new year
+                selectedTopicIndex = 0;
+                renderTopics(year);
+
+                // Update summary
+                updateSelectionSummary();
+            }
+
+            // Set selected topic and update UI + summary
+            function setSelectedTopic(index) {
+                if (selectedTopicIndex === index) return;
+                selectedTopicIndex = index;
+                const topicButtons = topicsContainer.querySelectorAll("button.btn-topic");
+                topicButtons.forEach((btn, i) => {
+                    if (i === index) {
+                        btn.classList.add("active");
+                        btn.setAttribute("aria-pressed", "true");
+                    } else {
+                        btn.classList.remove("active");
+                        btn.setAttribute("aria-pressed", "false");
+                    }
+                });
+                updateSelectionSummary();
+            }
+
+            // Update summary text
+            function updateSelectionSummary() {
+                const yearText = `${selectedYear}º Ensino Médio`;
+                const topicText = topicsByYear[selectedYear][selectedTopicIndex];
+                selectionSummary.textContent = `Português • ${yearText} • ${topicText}`;
+            }
+
+            // Initialization event listeners
+            yearButtons.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const year = parseInt(btn.getAttribute("data-year"), 10);
+                    setSelectedYear(year);
+                });
+            });
+
+            startLessonsBtn.addEventListener("click", () => {
+                const selection = selectionSummary.textContent;
+                alert(`Iniciando lições para: ${selection}`);
+            });
+
+            // Initial render
+            setSelectedYear(1);
+        })();
+    </script>
+
+</body>
+
+</html>
