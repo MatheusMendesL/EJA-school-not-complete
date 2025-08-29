@@ -28,8 +28,5 @@ form.addEventListener("submit", (e) => {
         router.navigate("/home");
       }
       console.log(data);
-    })
-    .catch((err) => {
-      console.error(err);
     });
 });
