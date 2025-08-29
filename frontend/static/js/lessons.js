@@ -5,7 +5,7 @@ async function lessons() {
   const codified_id = params.get("id");
   const id = atob(codified_id);
 
-  const matter = await fetch("get_matter_id/" + id, {
+  const matter = await fetch("matter/get_matter_id/" + id, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -15,47 +15,50 @@ async function lessons() {
     .then((response) => {
       if (response.status == 200) return response.json();
       throw new Error("Erro para devolver os dados");
+    }).then(data =>{
+      return data
     })
-    .then((data) => {
-      // ver oq devolve e separar por levels
 
-      return data;
+  document.querySelectorAll("#matter").forEach((e) => (e.textContent = matter.data[0].name));
+
+  
+  const data = await fetch("lesson/matter/" + id, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      if (response.status == 200) return response.json();
+      throw new Error("Erro para devolver os dados");
     });
 
-  document
-    .querySelectorAll("#matter")
-    .forEach((e) => (e.textContent = data.data.name));
+  const lessons = data.data; 
+  const div = document.querySelector("#topics");
 
-  // ver oq essa desgraça devolve e arrumar qlq coisa
-  console.log(matter);
-  fetch("lesson/matter/" + id, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((response) => {
-      if (response.status == 200) return response.json();
-      throw new Error("Erro para devolver os dados");
-    })
-    .then((data) => {
-      const div = document.querySelector("#topics");
-      const title_data = data.data.title;
+  const levels = {
+    "básico": 1,
+    "intermediário": 2,
+    "avançado": 3
+  };
 
-      title_data.forEach((e) => {
-        // passar card/btn
-        console.log(e);
+  document.querySelectorAll('.btn-year').forEach(btnYear => {
+    btnYear.addEventListener('click', () => {
+      
+      div.innerHTML = "";
 
+      const filtered = lessons.filter(lesson => levels[lesson.level] == btnYear.id);
+
+      filtered.forEach((lesson) => {
         const btn = document.createElement("button");
-        btn.id = data.data.id_lesson;
-        const id_teste = btn.id;
-        btn.classList.add(""); // classes p add dps do bootstrap
-        btn.textContent = e;
+        btn.id = lesson.id_lesson;
+        btn.textContent = lesson.title;
+        btn.classList.add("btn", "btn-primary", "m-1");
         div.appendChild(btn);
 
         btn.addEventListener("click", () => {
-          fetch("lesson/" + id_teste, {
+          fetch("lesson/" + btn.id, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -67,12 +70,13 @@ async function lessons() {
               throw new Error("Erro para devolver os dados");
             })
             .then((data) => {
-              router.navigate("/task?lesson_id=" + id_teste);
+              router.navigate("/task?lesson_id=" + btn.id);
               console.log(data.data);
             });
         });
       });
     });
+  });
 }
 
 lessons();

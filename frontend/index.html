@@ -75,6 +75,7 @@
             .on('/home', () => loadPage('home'))
             .on('/initial', () => loadPage('initial'))
             .on('/lessons', () => loadPage('lessons'))
+            .on('/task', () => loadPage('task'))
             .notFound(() => document.querySelector("#app").innerHTML = "<h1>404 - Página não encontrada</h1>");
 
         if (!localStorage.getItem('token')) {

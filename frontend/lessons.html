@@ -1,125 +1,58 @@
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Selecione ano e tema para Português</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom styles for active states */
-        .btn-year.active,
-        .btn-topic.active {
-            background-color: #e6f6f1;
-            border-color: #15a589;
-            color: #0f6e5c;
-            font-weight: 600;
-        }
+<body class="bg-light d-flex flex-column min-vh-100 px-3 py-4">
 
-        .btn-year,
-        .btn-topic {
-            border-width: 1.5px;
-            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-        }
+  <header class="d-flex justify-content-between align-items-center mb-4 mt-5 px-3">
+    <h1 class="h4 fw-semibold">
+      Selecione o ano e tema para <span id="matter"></span>
+    </h1>
+    <header class="p-4">
+    <a href="#" class="d-inline-flex align-items-center text-secondary text-sm fw-normal text-decoration-none"
+      onclick="event.preventDefault(); router.navigate('/home');">
+      <i class="fas fa-arrow-left me-2"></i>
+      Voltar
+    </a>
+  </header>
+  </header>
 
-        .btn-year:hover:not(.active),
-        .btn-topic:hover:not(.active) {
-            background-color: #f5fdfb;
-            cursor: pointer;
-        }
+ 
+  <main class="container flex-grow-1">
 
-        /* Ensure focus outlines for accessibility */
-        button:focus-visible {
-            outline-offset: 3px;
-            outline: 3px solid #15a589;
-        }
-    </style>
-</head>
-
-<body class="bg-gray-100 min-h-screen flex flex-col px-4 sm:px-8 py-6 font-sans text-gray-900">
-
-    <!-- Breadcrumb -->
-    <nav aria-label="Breadcrumb" class="text-gray-600 text-sm mb-4 select-none">
-        <ol class="inline-flex space-x-1 md:space-x-2 font-medium">
-            <!-- arrumar isso tbm -->
-            <li><span>Suas trilhas</span> ›</li>
-            <li class="font-semibold text-gray-900" id="matter"></li>
-            <li>› Ano e Tema</li>
-        </ol>
-    </nav>
-
-    <!-- Header and Voltar -->
-    <header class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-semibold leading-tight">
-            Selecione o ano e tema para <span id="matter"> </span> <!-- materia -->
-        </h1>
-        <button type="button" class="text-gray-700 hover:text-gray-900 font-semibold" aria-label="Voltar"
-            onclick="router.navigate('/home')">
-            ← Voltar
-        </button>
-    </header>
-
-    <!-- Container for selections -->
-    <main class="flex-grow max-w-4xl mx-auto w-full space-y-8">
-
-        <!-- 1. Select Year -->
-        <section aria-label="Selecione o ano" class="bg-white rounded-lg border border-gray-300 p-5 shadow-sm">
-            <h2 class="mb-4 text-gray-800 font-medium">Selecione o ano</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <button class="btn-year rounded-lg px-6 py-3 border border-gray-300 text-gray-800 text-center"
-                    data-year="1" aria-pressed="true">
-                    1º Ensino Médio
-                </button>
-                <button class="btn-year rounded-lg px-6 py-3 border border-gray-300 text-gray-800 text-center"
-                    data-year="2" aria-pressed="false">
-                    2º Ensino Médio
-                </button>
-                <button class="btn-year rounded-lg px-6 py-3 border border-gray-300 text-gray-800 text-center"
-                    data-year="3" aria-pressed="false">
-                    3º Ensino Médio
-                </button>
-            </div>
-        </section>
-
-        <!-- 2. Select Topic (depends on year) topicos selecionados -->
-        <section aria-label="Temas de Português" class="bg-white rounded-lg border border-gray-300 p-5 shadow-sm">
-            <nav aria-label="Caminho dos temas" class="mb-4 text-sm text-gray-600 select-none">
-                Temas de <span id="matter"></span> <!-- materia --> &gt; <span id="breadcrumb-year"
-                    class="font-semibold"><span id="year"><!-- Ano q foi selecionado --></span> Ensino Médio</span>
-            </nav>
-            <div class="grid grid-cols-1 sm:grid-cols-5 gap-4" id="topics">
+    <section class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h2 class="h6 fw-medium mb-3">Selecione o ano</h2>
+        <div class="row g-3">
+          <div class="col-12 col-md-4">
+            <button class="btn-year btn w-100" data-year="1" aria-pressed="true" id="1">
+              1º Ensino Médio
+            </button>
+          </div>
+          <div class="col-12 col-md-4">
+            <button class="btn-year btn w-100" data-year="2" aria-pressed="false" id="2">
+              2º Ensino Médio
+            </button>
+          </div>
+          <div class="col-12 col-md-4">
+            <button class="btn-year btn w-100" data-year="3" aria-pressed="false" id="3">
+              3º Ensino Médio
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
-                <!-- codigo c o topico, mudar p bootstrap -->
-                <!-- topics.forEach((topic, index) => {
-                    const btn = document.createElement("button");
-                    btn.type = "button";
-                    btn.className = "btn-topic rounded-lg px-4 py-3 border border-gray-300 text-gray-800 text-center";
-                    btn.textContent = topic;
-                    btn.setAttribute("data-topic-index", index);
-                    btn.setAttribute("aria-pressed", "false");
-                    if (index === 0) {
-                        btn.classList.add("active");
-                        btn.setAttribute("aria-pressed", "true");
-                    }
-                    btn.addEventListener("click", () => {
-                        setSelectedTopic(index);
-                    });
-                    topicsContainer.appendChild(btn); -->
-                <!-- topico q pega pelo js -->
-                <!-- Topics inserted dynamically by JS -->
-            </div>
-        </section>
+    <section class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <nav aria-label="breadcrumb" class="mb-3 small text-muted">
+          Temas de <span id="matter"></span> ›
+          <span id="breadcrumb-year" class="fw-semibold">
+            <span id="year"></span> Ensino Médio
+          </span>
+        </nav>
+        <div class="row g-3" id="topics">
+          
+        </div>
+      </div>
+    </section>
 
-        <!-- 3. Selection summary -->
-        <section aria-label="Resumo da seleção"
-            class="bg-white rounded-lg border border-gray-300 p-5 text-gray-700 shadow-sm min-h-[4rem]">
-            <p>Você selecionou: <strong id="selection-summary"><!-- txt topico e lição --></strong></p>
-        </section>
-
-        <!-- 4. Button começar lições -->
-        <button id="start-lessons-btn"
-            class="w-full bg-teal-600 hover:bg-teal-700 transition-colors text-white font-semibold py-3 rounded-md shadow-md">
-            Começar lições
-        </button>
-
-    </main>
-
+  </main>
 </body>

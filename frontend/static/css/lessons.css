@@ -1,0 +1,41 @@
+/* Botões de ano e tema */
+.btn-year,
+.btn-topic {
+  border: 1.5px solid #ced4da;
+  color: #212529;
+  background-color: #fff;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.btn-year:hover:not(.active),
+.btn-topic:hover:not(.active) {
+  background-color: #00edb2;
+  cursor: pointer;
+}
+
+.btn-year.active,
+.btn-topic.active {
+  background-color: #00b386;
+  border-color: #15a589;
+  color: #0f6e5c;
+  font-weight: 600;
+}
+
+/* Botão principal personalizado */
+.btn-teal {
+  background-color: #15a589;
+  color: #fff;
+}
+.btn-teal:hover {
+  background-color: #0f6e5c;
+}
+
+/* Acessibilidade - foco */
+button:focus-visible {
+  outline: 3px solid #15a589;
+  outline-offset: 3px;
+}
