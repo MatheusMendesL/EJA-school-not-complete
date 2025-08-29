@@ -1,4 +1,9 @@
 async function lessons() {
+
+  const userStorage = localStorage.getItem("user");
+  const user_data = JSON.parse(userStorage);
+
+  const id_user = user_data[0].id_user;
   const urlParams = window.location.search;
   const params = new URLSearchParams(urlParams);
   const token = localStorage.getItem("token");
@@ -15,13 +20,13 @@ async function lessons() {
     .then((response) => {
       if (response.status == 200) return response.json();
       throw new Error("Erro para devolver os dados");
-    }).then(data =>{
+    }).then(data => {
       return data
     })
 
   document.querySelectorAll("#matter").forEach((e) => (e.textContent = matter.data[0].name));
 
-  
+
   const data = await fetch("lesson/matter/" + id, {
     method: "GET",
     headers: {
@@ -32,9 +37,10 @@ async function lessons() {
     .then((response) => {
       if (response.status == 200) return response.json();
       throw new Error("Erro para devolver os dados");
-    });
+    }).then(data => { return data })
+    
 
-  const lessons = data.data; 
+  const lessons = data.data;
   const div = document.querySelector("#topics");
 
   const levels = {
@@ -45,16 +51,39 @@ async function lessons() {
 
   document.querySelectorAll('.btn-year').forEach(btnYear => {
     btnYear.addEventListener('click', () => {
-      
+
       div.innerHTML = "";
 
       const filtered = lessons.filter(lesson => levels[lesson.level] == btnYear.id);
 
+
+
       filtered.forEach((lesson) => {
+
         const btn = document.createElement("button");
+
+
+        fetch(`progress/${id}/${lesson.id_lesson}/${id_user}`, {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          }
+        }).then(response => {
+          if (response.status == 200) return response.json();
+          throw new Error("Erro para devolver os dados");
+        }).then(data => {
+
+          if (data.data.length != 0) {
+            btn.classList.add("btn", "btn-success", "m-1");
+          } else {
+            btn.classList.add("btn", "btn-danger", "m-1");
+          }
+        })
+
+
         btn.id = lesson.id_lesson;
         btn.textContent = lesson.title;
-        btn.classList.add("btn", "btn-primary", "m-1");
         div.appendChild(btn);
 
         btn.addEventListener("click", () => {
@@ -69,10 +98,7 @@ async function lessons() {
               if (response.status == 200) return response.json();
               throw new Error("Erro para devolver os dados");
             })
-            .then((data) => {
-              router.navigate("/task?lesson_id=" + btn.id);
-              console.log(data.data);
-            });
+            .then(() => { router.navigate("/task?lesson_id=" + btn.id); });
         });
       });
     });

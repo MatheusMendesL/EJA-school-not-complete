@@ -41,7 +41,26 @@ async function get_progress_by_matter(req, res) {
 }
 
 async function get_progress_by_matter_id(req, res) {
+    const data_id = {
+        'matter': req.params.matter,
+        'lesson': req.params.lesson_id,
+        'user': req.params.id
+    }
 
+    try {
+        const { query_sql, affectedRows, data } = await functionsModel.get_progress_id(data_id)
+        res.json(
+            response(
+                "success",
+                "Got user data successfully",
+                query_sql,
+                affectedRows,
+                data
+            )
+        );
+    } catch (error) {
+        res.status(500).json(response("error", error.message, null, 0, null));
+    }
 }
 
 module.exports = {

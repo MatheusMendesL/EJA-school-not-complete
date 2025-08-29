@@ -29,7 +29,23 @@ function get_progress(get_data) {
     })
 }
 
+function get_progress_id(data_lesson) {
+    return new Promise((resolve, reject) => {
+        const query_sql = 'SELECT * FROM user_progress WHERE id_user = ? AND matter_id = ? AND lesson_id = ?'
+
+        conn.query(query_sql, [data_lesson.user, data_lesson.matter, data_lesson.lesson], (error, results) => {
+            if (error) return reject(error);
+            resolve({
+                query_sql,
+                affectedRows: results.length,
+                data: results,
+            });
+        })
+    })
+}
+
 
 module.exports = {
-    get_progress
+    get_progress,
+    get_progress_id
 }
