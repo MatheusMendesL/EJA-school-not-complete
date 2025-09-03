@@ -11,20 +11,6 @@
   font-weight: 500;
 }
 
-.btn-year:hover:not(.active),
-.btn-topic:hover:not(.active) {
-  background-color: #00edb2;
-  cursor: pointer;
-}
-
-.btn-year.active,
-.btn-topic.active {
-  background-color: #00b386;
-  border-color: #15a589;
-  color: #0f6e5c;
-  font-weight: 600;
-}
-
 /* Botão principal personalizado */
 .btn-teal {
   background-color: #15a589;
@@ -38,4 +24,13 @@
 button:focus-visible {
   outline: 3px solid #15a589;
   outline-offset: 3px;
+}
+
+.btnIncomplete {
+  background-color: #a10000;
+  transition: 1s ease background-color;
+}
+
+.btnIncomplete:hover {
+  background-color: #7d0000;
 }

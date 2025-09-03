@@ -5,15 +5,15 @@
       Selecione o ano e tema para <span id="matter"></span>
     </h1>
     <header class="p-4">
-    <a href="#" class="d-inline-flex align-items-center text-secondary text-sm fw-normal text-decoration-none"
-      onclick="event.preventDefault(); router.navigate('/home');">
-      <i class="fas fa-arrow-left me-2"></i>
-      Voltar
-    </a>
-  </header>
+      <a href="#" class="d-inline-flex align-items-center text-secondary text-sm fw-normal text-decoration-none"
+        onclick="event.preventDefault(); router.navigate('/home');">
+        <i class="fas fa-arrow-left me-2"></i>
+        Voltar
+      </a>
+    </header>
   </header>
 
- 
+
   <main class="container flex-grow-1">
 
     <section class="card mb-4 shadow-sm">
@@ -21,17 +21,17 @@
         <h2 class="h6 fw-medium mb-3">Selecione o ano</h2>
         <div class="row g-3">
           <div class="col-12 col-md-4">
-            <button class="btn-year btn w-100" data-year="1" aria-pressed="true" id="1">
+            <button class="btn-year btn btn-outline-secondary w-100" data-year="1" aria-pressed="true" id="1">
               1º Ensino Médio
             </button>
           </div>
           <div class="col-12 col-md-4">
-            <button class="btn-year btn w-100" data-year="2" aria-pressed="false" id="2">
+            <button class="btn-year btn btn-outline-secondary w-100" data-year="2" aria-pressed="false" id="2">
               2º Ensino Médio
             </button>
           </div>
           <div class="col-12 col-md-4">
-            <button class="btn-year btn w-100" data-year="3" aria-pressed="false" id="3">
+            <button class="btn-year btn btn-outline-secondary w-100" data-year="3" aria-pressed="false" id="3">
               3º Ensino Médio
             </button>
           </div>
@@ -48,8 +48,8 @@
             <span id="year"></span> Ensino Médio
           </span>
         </nav>
-        <div class="row g-3" id="topics">
-          
+        <div class="row g-3 mt-3 d-flex justify-content-around" id="topics">
+
         </div>
       </div>
     </section>

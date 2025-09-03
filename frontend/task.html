@@ -1,0 +1,66 @@
+<body>
+  <div class="container py-4">
+    <!-- Header -->
+    <header class="d-flex justify-content-between align-items-center small mb-4 lesson-header">
+      <a href="#" class="d-inline-flex align-items-center text-secondary text-sm fw-normal text-decoration-none"
+       id="back">
+        <i class="fas fa-arrow-left me-2"></i>
+        Voltar
+      </a>
+      <div><span id="matter"></span> - Lição <span id="matter_number"></span></div>
+    </header>
+
+    <!-- Progresso da Lição -->
+    <section class="card-custom p-3 mb-4">
+      <div class="d-flex justify-content-between mb-2 small fw-semibold">
+        <span>Progresso da lição</span>
+        <span class="text-muted small"><span id="number"></span> de 10</span>
+      </div>
+      <div class="progress-bg">
+        <div class="progress-fill"></div>
+      </div>
+    </section>
+
+    <!-- Pergunta -->
+    <section class="card-custom p-4">
+      <h2 class="fw-semibold mb-4 fs-6">
+        <span id="question"></span>
+      </h2>
+
+
+      <!-- alterar de kd questão -->
+      <form class="vstack gap-3">
+        <div class="form-check">
+          <input class="form-check-input d-none" type="radio" name="answer" id="option1">
+          <label class="form-check-label" for="option1">
+            Indicar o tempo da ação
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input d-none" type="radio" name="answer" id="option2">
+          <label class="form-check-label" for="option2">
+            Ser o termo sobre o qual se declara algo
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input d-none" type="radio" name="answer" id="option3">
+          <label class="form-check-label" for="option3">
+            Complementar o sentido do verbo
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input d-none" type="radio" name="answer" id="option4">
+          <label class="form-check-label" for="option4">
+            Modificar o sentido do substantivo
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-custom fw-semibold w-100 py-3 mt-3">
+          Confirmar resposta
+        </button>
+      </form>
+    </section>
+  </div>

@@ -5,7 +5,7 @@ async function home() {
   const token = localStorage.getItem("token");
   const user_data = JSON.parse(userStorage);
 
-  const id = user_data[0].id_user;
+  const id = user_data.data[0].id_user;
 
   try {
     // faz tudo na base de um await sem um then, separado, soq eu gosto de then
@@ -15,12 +15,14 @@ async function home() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-    }).then(response => {
-      if (response.status == 200) return response.json()
-      throw new Error("Erro ao pegar as matérias: " + response.status);
-    }).then(data => {
-      return data
     })
+      .then((response) => {
+        if (response.status == 200) return response.json();
+        throw new Error("Erro ao pegar as matérias: " + response.status);
+      })
+      .then((data) => {
+        return data;
+      });
 
     const user_data = userData.data;
 
@@ -31,23 +33,23 @@ async function home() {
     });
     document.querySelector("progress").value = user_data[0].xp;
 
-
     const mattersResponse = await fetch("matter/get_matters", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-    }).then(response => {
-      if (response.status == 200) return response.json()
-      throw new Error("Erro ao pegar as matérias: " + response.status);
-    }).then(data => {
-      return data
     })
-    const response = mattersResponse
+      .then((response) => {
+        if (response.status == 200) return response.json();
+        throw new Error("Erro ao pegar as matérias: " + response.status);
+      })
+      .then((data) => {
+        return data;
+      });
+    const response = mattersResponse;
     const mattersData = mattersResponse.data;
     if (response.status === "success") {
-
       // guarda as promessas aq dentro
       const progressPromises = [];
 
@@ -62,13 +64,14 @@ async function home() {
             },
           }).then((res) => {
             if (res.status !== 200) {
-              throw new Error(`Erro ao pegar o progresso de ${matter.name}: ${res.status}`);
+              throw new Error(
+                `Erro ao pegar o progresso de ${matter.name}: ${res.status}`
+              );
             }
             return res.json();
           })
         );
       }
-
 
       // executa a promessa
       const allProgressData = await Promise.all(progressPromises);
@@ -78,7 +81,6 @@ async function home() {
       for (let i = 0; i < mattersData.length; i++) {
         progress[mattersData[i].name] = allProgressData[i].data;
       }
-
 
       // aq é minha parte msm
 
@@ -112,7 +114,9 @@ async function home() {
           <div class="card p-4">
             <div class="d-flex align-items-center gap-3 mb-2">
               <div class="d-flex align-items-center justify-content-center rounded-3"
-                style="width: 40px; height: 40px; background-color:${colors_background[matter.name]}; color: #fff;">
+                style="width: 40px; height: 40px; background-color:${
+                  colors_background[matter.name]
+                }; color: #fff;">
                 <i class="${icons[matter.name]}"></i>
               </div>
               <div>
@@ -123,9 +127,13 @@ async function home() {
             <div class="d-flex justify-content-between align-items-center fs-7 text-dark-emphasis mb-1">
               <span>Progresso</span>
             </div>
-            <div class="progress mb-3" role="progressbar" aria-label="Progresso de ${matter.name}" aria-valuenow="${progressPercentage}"
+            <div class="progress mb-3" role="progressbar" aria-label="Progresso de ${
+              matter.name
+            }" aria-valuenow="${progressPercentage}"
               aria-valuemin="0" aria-valuemax="100">
-              <div class="progress-bar" style="width: ${progressPercentage}%; background-color:${colors_background[matter.name]};"></div>
+              <div class="progress-bar" style="width: ${progressPercentage}%; background-color:${
+          colors_background[matter.name]
+        };"></div>
             </div>
             <button class="btnLesson btn btn-outline-secondary w-100 fs-7 py-1" type="button">
               Fazer lições
