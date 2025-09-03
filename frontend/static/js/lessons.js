@@ -82,10 +82,7 @@ async function lessons() {
             }
           });
 
-<<<<<<< HEAD
         btn.id = btoa(lesson.id_lesson);
-=======
->>>>>>> 063b6cdd94718848b76b002221e5147cbaa8894e
         btn.textContent = lesson.title;
         div.appendChild(btn);
 
@@ -102,11 +99,7 @@ async function lessons() {
               throw new Error("Erro para devolver os dados");
             })
             .then(() => {
-<<<<<<< HEAD
               router.navigate(`/task?lesson_id=${btn.id}&matter_id=${btoa(id)}`);
-=======
-              router.navigate("/task?lesson_id=" + btn.id);
->>>>>>> 063b6cdd94718848b76b002221e5147cbaa8894e
             });
         });
       });
