@@ -9,7 +9,7 @@ async function task(){
 
     document.querySelector("#back").addEventListener("click", (e) => {
         e.preventDefault()
-        router.navigate("/lessons?id=" + atob(id_matter))
+        router.navigate("/lessons?id=" + id_matter)
     })
 
     const tasks = await fetch('task/lesson/' + id, {

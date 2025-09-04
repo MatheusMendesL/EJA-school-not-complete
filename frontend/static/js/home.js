@@ -5,7 +5,7 @@ async function home() {
   const token = localStorage.getItem("token");
   const user_data = JSON.parse(userStorage);
 
-  const id = user_data.data[0].id_user;
+  const id = user_data[0].id_user;
 
   try {
     // faz tudo na base de um await sem um then, separado, soq eu gosto de then
