@@ -54,3 +54,13 @@ body {
 .btn-custom:hover {
   background-color: #6cc9b1;
 }
+
+.correct {
+  border: 1px solid #0bda00;
+  color: #0bda00;
+}
+
+.error {
+  border: 1px solid #b30000;
+  color: #b30000;
+}

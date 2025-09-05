@@ -121,4 +121,23 @@ async function update_xp_level(req, res) {
   }
 }
 
-module.exports = { get_user, signup, login, get_level_xp, update_xp_level };
+async function update_xp(req, res) {
+  const id = req.params.id;
+
+  try {
+    const { query_sql, affected_rows, data, message } =
+      await functionsModel.update_xp(id);
+    res.json(response("success", message, query_sql, affected_rows, data));
+  } catch (error) {
+    res.status(500).json(response("error", error.message, null, 0, null));
+  }
+}
+
+module.exports = {
+  get_user,
+  signup,
+  login,
+  get_level_xp,
+  update_xp_level,
+  update_xp,
+};

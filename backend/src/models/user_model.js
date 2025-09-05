@@ -36,19 +36,18 @@ function signup(data) {
         if (error) return reject(error);
         try {
           const data_id = {
-            id: results.insertId
-          }
-          const data_user = await get_user_data(data_id)
+            id: results.insertId,
+          };
+          const data_user = await get_user_data(data_id);
           resolve({
             query_sql,
             affectedRows: results.affectedRows,
             data: data_user,
-            insertId: results.insertId
+            insertId: results.insertId,
           });
-        } catch(error) {
-          reject(error)
+        } catch (error) {
+          reject(error);
         }
-        
       }
     );
   });
@@ -107,7 +106,8 @@ async function update_xp_level(id) {
 
       if (xp >= 1000) {
         const newLevel = level + 1;
-        const query_sql = "UPDATE users SET xp = 0, ranking = ? WHERE id_user = ?";
+        const query_sql =
+          "UPDATE users SET xp = 0, ranking = ? WHERE id_user = ?";
 
         conn.query(query_sql, [newLevel, id], (error, results) => {
           if (error) return reject(error);
@@ -115,7 +115,7 @@ async function update_xp_level(id) {
             query_sql,
             affected_rows: results.affectedRows,
             data: results,
-            message: `Your new level is ${newLevel} and your xp is 0`
+            message: `Your new level is ${newLevel} and your xp is 0`,
           });
         });
       } else {
@@ -123,7 +123,7 @@ async function update_xp_level(id) {
           query_sql: null,
           affected_rows: 0,
           data: null,
-          message: `XP not enough to level up. Current XP: ${xp}`
+          message: `XP not enough to level up. Current XP: ${xp}`,
         });
       }
     } catch (error) {
@@ -132,6 +132,21 @@ async function update_xp_level(id) {
   });
 }
 
+function update_xp(id, xp) {
+  return new Promise(async (resolve, reject) => {
+    const query_sql = "UPDATE users SET xp = ? WHERE id_user = ? ";
+
+    conn.query(query_sql, [xp, id], (error, results) => {
+      if (error) return reject(error);
+
+      resolve({
+        query_sql,
+        affected_rows: results.affectedRows,
+        data: results,
+      });
+    });
+  });
+}
 
 module.exports = {
   get_user_data,
@@ -139,4 +154,5 @@ module.exports = {
   login,
   get_level_xp,
   update_xp_level,
+  update_xp,
 };

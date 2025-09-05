@@ -1,15 +1,13 @@
 <body>
   <div class="container py-4">
-    <!-- Header -->
     <header class="d-flex justify-content-between align-items-center small mb-4 lesson-header">
       <a href="#" class="d-inline-flex align-items-center text-secondary text-sm fw-normal text-decoration-none"
-       id="back">
+        id="back">
         <i class="fas fa-arrow-left me-2"></i>
         Voltar
       </a>
     </header>
 
-    <!-- Progresso da Lição -->
     <section class="card-custom p-3 mb-4">
       <div class="d-flex justify-content-between mb-2 small fw-semibold">
         <span>Progresso da lição</span>
@@ -20,46 +18,39 @@
       </div>
     </section>
 
-    <!-- Pergunta -->
     <section class="card-custom p-4">
       <h2 class="fw-semibold mb-4 fs-6">
         <span id="question"></span>
       </h2>
 
-
-      <!-- alterar de kd questão -->
       <form class="vstack gap-3">
         <div class="form-check">
-          <input class="form-check-input d-none" type="radio" name="answer" id="option1">
-          <label class="form-check-label" for="option1" id="optionA">
-          
-          </label>
+          <input class="form-check-input d-none" type="radio" name="answer" id="option_A">
+          <label class="form-check-label" for="option_A" id="optionA"></label>
         </div>
 
         <div class="form-check">
-          <input class="form-check-input d-none" type="radio" name="answer" id="option2">
-          <label class="form-check-label" for="option2" id="optionB">
-            
-          </label>
+          <input class="form-check-input d-none" type="radio" name="answer" id="option_B">
+          <label class="form-check-label" for="option_B" id="optionB"></label>
         </div>
 
         <div class="form-check">
-          <input class="form-check-input d-none" type="radio" name="answer" id="option3">
-          <label class="form-check-label" for="option3" id="optionC">
-
-          </label>
+          <input class="form-check-input d-none" type="radio" name="answer" id="option_C">
+          <label class="form-check-label" for="option_C" id="optionC"></label>
         </div>
 
         <div class="form-check">
-          <input class="form-check-input d-none" type="radio" name="answer" id="option4">
-          <label class="form-check-label" for="option4" id="optionD">
-
-          </label>
+          <input class="form-check-input d-none" type="radio" name="answer" id="option_D">
+          <label class="form-check-label" for="option_D" id="optionD"></label>
         </div>
 
         <button class="btn btn-custom fw-semibold w-100 py-3 mt-3 btn_submit">
           Confirmar resposta
         </button>
+        <button class="btn btn-custom fw-semibold w-100 py-3 mt-3 btn_forward d-none">
+          Avançar
+        </button>
       </form>
     </section>
   </div>
+</body>
