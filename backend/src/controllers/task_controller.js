@@ -60,4 +60,5 @@ async function answer(req, res) {
 module.exports = {
   get_task_by_id,
   get_tasks,
+  answer
 };

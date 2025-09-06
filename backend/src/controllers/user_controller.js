@@ -123,10 +123,11 @@ async function update_xp_level(req, res) {
 
 async function update_xp(req, res) {
   const id = req.params.id;
+  const xp = req.params.xp
 
   try {
     const { query_sql, affected_rows, data, message } =
-      await functionsModel.update_xp(id);
+      await functionsModel.update_xp(id, xp);
     res.json(response("success", message, query_sql, affected_rows, data));
   } catch (error) {
     res.status(500).json(response("error", error.message, null, 0, null));

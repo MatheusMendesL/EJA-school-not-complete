@@ -132,21 +132,37 @@ async function update_xp_level(id) {
   });
 }
 
-function update_xp(id, xp) {
+async function update_xp(id, xp_front) {
   return new Promise(async (resolve, reject) => {
-    const query_sql = "UPDATE users SET xp = ? WHERE id_user = ? ";
+    try {
+      const { xp: currentXp } = await get_level_xp(id);
 
-    conn.query(query_sql, [xp, id], (error, results) => {
-      if (error) return reject(error);
+      // novo XP após o ganho
+      let newXp = currentXp + xp_front;
 
-      resolve({
-        query_sql,
-        affected_rows: results.affectedRows,
-        data: results,
+      // atualiza XP
+      const query_sql = "UPDATE users SET xp = ? WHERE id_user = ?";
+      conn.query(query_sql, [newXp, id], async (error, results) => {
+        if (error) return reject(error);
+
+        // depois de atualizar, verifica se precisa subir nível
+        const levelResult = await update_xp_level(id);
+
+        resolve({
+          query_sql,
+          affected_rows: results.affectedRows,
+          data: results,
+          message: `XP atualizado para ${newXp}. ${levelResult.message}`
+        });
       });
-    });
+
+    } catch (error) {
+      reject(error);
+    }
   });
 }
+
+
 
 module.exports = {
   get_user_data,
