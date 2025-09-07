@@ -58,10 +58,10 @@ async function task() {
 
         letters.map(letter => {
             document.querySelectorAll(`#option${letter}`).forEach(label => {
-            label.classList.remove("correct", "error");
-        });
+                label.classList.remove("correct", "error");
+            });
         })
-        
+
     }
 
     function checkAnswer() {
@@ -110,7 +110,22 @@ async function task() {
             showQuestion();
         } else {
 
-            // enviar pro user_progress
+            fetch(`progress/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    user: id_user,
+                    lesson: id,
+                    matter: atob(id_matter)
+                })
+            }).then((response) => {
+                if (response.status === 200) return response.json();
+                throw new Error("Erro: " + response.status);
+            }).then(data => console.log(data))
+
             fetch(`user/update_xp/${id_user}/${xp}`, {
                 method: "PUT",
                 headers: {
@@ -127,7 +142,7 @@ async function task() {
         }
     });
 
-    
+
 
     showQuestion();
 }

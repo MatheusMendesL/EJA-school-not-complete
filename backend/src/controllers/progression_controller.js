@@ -63,7 +63,35 @@ async function get_progress_by_matter_id(req, res) {
     }
 }
 
+async function add_progress(req, res){
+
+    const {user, lesson, matter} = req.body
+    const data_id = {
+        matter: matter,
+        lesson: lesson,
+        user: user
+    }
+
+    try {
+        const { query_sql, affectedRows, data } = await functionsModel.add_progress(data_id)
+        res.json(
+            response(
+                "success",
+                "Got user data successfully",
+                query_sql,
+                affectedRows,
+                data
+            )
+        );
+    } catch (error) {
+        console.error("ERRO NO ADD_PROGRESS:", error);
+        res.status(500).json(response("error", error, null, 0, null));
+    }
+
+}
+
 module.exports = {
     get_progress_by_matter,
-    get_progress_by_matter_id
+    get_progress_by_matter_id,
+    add_progress
 }
