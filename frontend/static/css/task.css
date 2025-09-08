@@ -64,3 +64,37 @@ body {
   border: 1px solid #b30000;
   color: #b30000;
 }
+
+/* Responsividade para task */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .card-custom {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .card-custom {
+    margin-bottom: 0.75rem;
+    padding: 1rem !important;
+  }
+  
+  .form-check-label {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .btn-custom {
+    font-size: 0.875rem;
+    padding: 0.75rem 1rem;
+  }
+}

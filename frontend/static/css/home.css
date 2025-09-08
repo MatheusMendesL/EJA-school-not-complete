@@ -109,3 +109,44 @@ progress.rounded-full {
 .progress-ciencias::-moz-progress-bar {
     background-color: #a36fff;
 }
+
+/* Responsividade para home */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .row.g-4 {
+        --bs-gutter-x: 1rem;
+        --bs-gutter-y: 1rem;
+    }
+    
+    .card {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .card {
+        margin-bottom: 0.75rem;
+    }
+    
+    .btn {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .fs-6 {
+        font-size: 1rem !important;
+    }
+    
+    .fs-7 {
+        font-size: 0.875rem !important;
+    }
+}
