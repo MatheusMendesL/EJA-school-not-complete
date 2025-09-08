@@ -7,6 +7,138 @@ body {
     min-height: 100vh;
 }
 
+/* Tema escuro baseado em data-theme="dark" no elemento html */
+html[data-theme="dark"] body {
+    background-color: #0e1116;
+    color: #e6edf3;
+}
+
+html[data-theme="dark"] .bg-white {
+    background-color: #161b22 !important;
+}
+
+html[data-theme="dark"] .text-dark,
+html[data-theme="dark"] .text-dark-emphasis {
+    color: #e6edf3 !important;
+}
+
+html[data-theme="dark"] .text-secondary {
+    color: #9aa4af !important;
+}
+
+html[data-theme="dark"] .text-muted {
+    color: #9aa4af !important;
+}
+
+html[data-theme="dark"] .border,
+html[data-theme="dark"] .border-gray {
+    border-color: #30363d !important;
+}
+
+html[data-theme="dark"] progress::-webkit-progress-bar {
+    background-color: #1f2a33;
+}
+
+html[data-theme="dark"] progress.rounded-full {
+    background-color: #1f2a33;
+}
+
+/* Botão de tema (posicionamento básico) */
+.light-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    cursor: pointer;
+    color: inherit;
+}
+
+html[data-theme="dark"] .light-dark {
+    background: transparent;
+}
+
+/* Componentes comuns no modo escuro */
+html[data-theme="dark"] .bg-light {
+    background-color: #0f141a !important;
+}
+
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .card-body,
+html[data-theme="dark"] .card-header,
+html[data-theme="dark"] .card-footer,
+html[data-theme="dark"] .section-continue,
+html[data-theme="dark"] .section-performance,
+html[data-theme="dark"] .section-xp,
+html[data-theme="dark"] .p-3.bg-white,
+html[data-theme="dark"] .p-4.bg-white {
+    background-color: #161b22 !important;
+    color: #e6edf3 !important;
+    border-color: #30363d !important;
+}
+
+/* Inputs e formularios */
+html[data-theme="dark"] .form-control,
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+    background-color: #0f141a !important;
+    color: #e6edf3 !important;
+    border-color: #30363d !important;
+}
+html[data-theme="dark"] .form-control::placeholder,
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+    color: #7d8691 !important;
+}
+
+/* Botões gerais */
+html[data-theme="dark"] .btn-outline-secondary,
+html[data-theme="dark"] .btn.btn-outline-secondary,
+html[data-theme="dark"] .btn-year,
+html[data-theme="dark"] .btn-topic {
+    background-color: #161b22 !important;
+    color: #e6edf3 !important;
+    border-color: #30363d !important;
+}
+html[data-theme="dark"] .btn-outline-secondary:hover,
+html[data-theme="dark"] .btn.btn-outline-secondary:hover,
+html[data-theme="dark"] .btn-year:hover,
+html[data-theme="dark"] .btn-topic:hover {
+    background-color: #1f2430 !important;
+    border-color: #3b3f45 !important;
+}
+
+/* Específicos das páginas */
+/* Lessons */
+html[data-theme="dark"] .btn-teal { /* mantém contraste no escuro */
+    background-color: #15a589 !important;
+    color: #ffffff !important;
+}
+
+/* Task */
+html[data-theme="dark"] .card-custom {
+    background-color: #161b22 !important;
+    border-color: #30363d !important;
+    color: #e6edf3 !important;
+}
+html[data-theme="dark"] .progress-bg {
+    background-color: #1f2a33 !important;
+}
+html[data-theme="dark"] .form-check-label {
+    border-color: #3b3f45 !important;
+    color: #e6edf3 !important;
+    background-color: #0f141a !important;
+}
+html[data-theme="dark"] .form-check-input:checked + .form-check-label {
+    border-color: #238636 !important; /* verde GitHub-like */
+}
+html[data-theme="dark"] .btn-custom {
+    background-color: #258a74 !important;
+    color: #ffffff !important;
+}
+
 /* Media queries para responsividade */
 @media (max-width: 768px) {
     body {
