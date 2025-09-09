@@ -5,7 +5,7 @@ async function home() {
   const token = localStorage.getItem("token");
   const user_data = JSON.parse(userStorage);
 
-  const id = user_data[0].id_user;
+  const id = user_data.id_user;
 
   try {
     // faz tudo na base de um await sem um then, separado, soq eu gosto de then
@@ -24,14 +24,15 @@ async function home() {
         return data;
       });
 
-    const user_data = userData.data;
+    const user_data = userData;
+    console.log(user_data);
 
-    document.querySelector("#name").textContent = user_data[0].name;
-    document.querySelector("#level").textContent = user_data[0].ranking;
+    document.querySelector("#name").textContent = user_data.data.name;
+    document.querySelector("#level").textContent = user_data.data.ranking;
     document.querySelectorAll("#xp").forEach((e) => {
-      e.textContent = user_data[0].xp;
+      e.textContent = user_data.data.xp;
     });
-    document.querySelector("progress").value = user_data[0].xp;
+    document.querySelector("progress").value = user_data.data.xp;
 
     const mattersResponse = await fetch("matter/get_matters", {
       method: "GET",
@@ -114,9 +115,8 @@ async function home() {
           <div class="card p-4">
             <div class="d-flex align-items-center gap-3 mb-2">
               <div class="d-flex align-items-center justify-content-center rounded-3"
-                style="width: 40px; height: 40px; background-color:${
-                  colors_background[matter.name]
-                }; color: #fff;">
+                style="width: 40px; height: 40px; background-color:${colors_background[matter.name]
+          }; color: #fff;">
                 <i class="${icons[matter.name]}"></i>
               </div>
               <div>
@@ -127,13 +127,11 @@ async function home() {
             <div class="d-flex justify-content-between align-items-center fs-7 text-dark-emphasis mb-1">
               <span>Progresso</span>
             </div>
-            <div class="progress mb-3" role="progressbar" aria-label="Progresso de ${
-              matter.name
-            }" aria-valuenow="${progressPercentage}"
+            <div class="progress mb-3" role="progressbar" aria-label="Progresso de ${matter.name
+          }" aria-valuenow="${progressPercentage}"
               aria-valuemin="0" aria-valuemax="100">
-              <div class="progress-bar" style="width: ${progressPercentage}%; background-color:${
-          colors_background[matter.name]
-        };"></div>
+              <div class="progress-bar" style="width: ${progressPercentage}%; background-color:${colors_background[matter.name]
+          };"></div>
             </div>
             <button class="btnLesson btn btn-outline-secondary w-100 fs-7 py-1" type="button">
               Fazer lições

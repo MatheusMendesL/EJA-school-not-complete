@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="./static/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="./static/css/global.css">
     <script src="./static/js/darkMode.js"></script>
+    <script src="./static/js/accessibility.js"></script>
 
 </head>
 
 <body>
 
-    <div id="app"></div>
+    <div id="app" role="main"></div>
 
     <script src="https://unpkg.com/navigo"></script>
 
@@ -28,7 +29,9 @@
         const funs = {
             home: () => home(),
             lessons: () => lessons(),
-            task: () => task()
+            task: () => task(),
+            login: () => login(),
+            signup: () => signup()
         }
 
         async function loadPage(page, title = 'estudadores.edu') {
@@ -77,14 +80,13 @@
             .on('/login', () => loadPage('login'))
             .on('/signup', () => loadPage('signup'))
             .on('/home', () => loadPage('home'))
-            .on('/initial', () => loadPage('initial'))
             .on('/lessons', () => loadPage('lessons'))
             .on('/task', () => loadPage('task'))
             .on('/finalTask', () => loadPage('finalTask'))
             .notFound(() => document.querySelector("#app").innerHTML = "<h1>404 - Página não encontrada</h1>");
 
         if (!localStorage.getItem('token')) {
-            router.navigate('/initial')
+            router.navigate('/signup')
         } else {
             router.navigate('/home')
         }

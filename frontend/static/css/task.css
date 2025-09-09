@@ -56,13 +56,30 @@ body {
 }
 
 .correct {
-  border: 1px solid #0bda00;
-  color: #0bda00;
+  border: 1px solid #2ea043 !important;
+  color: #2ea043 !important;
+  background-color: rgba(46, 160, 67, 0.1) !important;
 }
 
 .error {
-  border: 1px solid #b30000;
-  color: #b30000;
+  border: 1px solid #f85149 !important;
+  color: #f85149 !important;
+  background-color: rgba(248, 81, 73, 0.1) !important;
+}
+
+/* Cores unificadas para modo claro e escuro */
+
+/* Estilos específicos para modo escuro - maior especificidade */
+html[data-theme="dark"] .card-custom .form-check-label.correct {
+  border: 1px solid #2ea043 !important;
+  color: #2ea043 !important;
+  background-color: rgba(46, 160, 67, 0.2) !important;
+}
+
+html[data-theme="dark"] .card-custom .form-check-label.error {
+  border: 1px solid #f85149 !important;
+  color: #f85149 !important;
+  background-color: rgba(248, 81, 73, 0.2) !important;
 }
 
 /* Responsividade para task */

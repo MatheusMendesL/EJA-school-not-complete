@@ -1,3 +1,5 @@
+function login() {
+
 const form = document.querySelector("form");
 
 form.addEventListener("submit", (e) => {
@@ -8,7 +10,7 @@ form.addEventListener("submit", (e) => {
 
   const body = { email, password };
 
-  fetch("/user/login", {
+  fetch("http://localhost:3000/user/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -30,3 +32,7 @@ form.addEventListener("submit", (e) => {
       console.error(err);
     });
 });
+
+}
+
+login()

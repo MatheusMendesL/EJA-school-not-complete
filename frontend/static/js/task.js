@@ -7,7 +7,7 @@ async function task() {
     const id = atob(id_lesson);
     const userStorage = localStorage.getItem("user");
     const user_data = JSON.parse(userStorage);
-    const id_user = user_data[0].id_user;
+    const id_user = user_data.data[0].id_user;
 
     document.querySelector("#back").addEventListener("click", (e) => {
         e.preventDefault();
@@ -47,6 +47,13 @@ async function task() {
         document.querySelector("#number").textContent = index + 1;
         document.querySelector(".progress-fill").style.width = `${percentage}%`;
 
+        // Atualizar progressbar para acessibilidade
+        const progressBar = document.querySelector('.progress-bg');
+        progressBar.setAttribute('aria-valuenow', percentage);
+        progressBar.setAttribute('aria-label', `Progresso da lição: ${percentage}%`);
+
+        // Atualizar título da questão para acessibilidade
+        document.querySelector("#question-title").setAttribute('aria-label', `Questão ${index + 1}: ${q.question}`);
 
         selectedAnswer = null;
         const letters = [
@@ -59,9 +66,13 @@ async function task() {
         letters.map(letter => {
             document.querySelectorAll(`#option${letter}`).forEach(label => {
                 label.classList.remove("correct", "error");
+                label.setAttribute('aria-pressed', 'false');
             });
         })
 
+        // Focar na primeira opção para navegação por teclado
+        document.querySelector("#optionA").focus();
+        
     }
 
     function checkAnswer() {
@@ -74,13 +85,21 @@ async function task() {
 
         if (selectedAnswer === q.correct_answer) {
             selectedLabel.classList.add("correct");
+            selectedLabel.setAttribute('aria-pressed', 'true');
+            selectedLabel.setAttribute('aria-label', 'Resposta correta');
             correto++;
             xp += 50;
+            
         } else {
             correctLabel.classList.add("correct");
+            correctLabel.setAttribute('aria-pressed', 'true');
+            correctLabel.setAttribute('aria-label', 'Resposta correta');
             selectedLabel.classList.add("error");
+            selectedLabel.setAttribute('aria-pressed', 'true');
+            selectedLabel.setAttribute('aria-label', 'Resposta incorreta');
             errado++;
             xp -= 25;
+            
         }
 
         index++;
@@ -88,12 +107,41 @@ async function task() {
 
         document.querySelector(".btn_submit").classList.add("d-none");
         document.querySelector(".btn_forward").classList.remove("d-none");
+        
+        // Focar no botão avançar para acessibilidade
+        document.querySelector(".btn_forward").focus();
     }
 
-    document.querySelector("#A").addEventListener("click", () => selectedAnswer = "A");
-    document.querySelector("#B").addEventListener("click", () => selectedAnswer = "B");
-    document.querySelector("#C").addEventListener("click", () => selectedAnswer = "C");
-    document.querySelector("#D").addEventListener("click", () => selectedAnswer = "D");
+    // Função para selecionar resposta com acessibilidade
+    function selectAnswer(letter) {
+        selectedAnswer = letter;
+        const letters = ['A', 'B', 'C', 'D'];
+        
+        letters.forEach(l => {
+            const label = document.querySelector(`#option${l}`);
+            if (l === letter) {
+                label.setAttribute('aria-pressed', 'true');
+                label.setAttribute('aria-label', `Opção ${letter} selecionada`);
+            } else {
+                label.setAttribute('aria-pressed', 'false');
+                label.setAttribute('aria-label', `Opção ${l}`);
+            }
+        });
+    }
+
+    // Event listeners para clique e teclado
+    ['A', 'B', 'C', 'D'].forEach(letter => {
+        const label = document.querySelector(`#option${letter}`);
+        
+        label.addEventListener("click", () => selectAnswer(letter));
+        
+        label.addEventListener("keydown", (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                selectAnswer(letter);
+            }
+        });
+    });
 
 
     document.querySelector(".btn_submit").addEventListener("click", (e) => {

@@ -1,32 +1,39 @@
-const form = document.querySelector("form");
+function signup() {
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
 
-  const name = form.querySelector('input[name="name"]').value;
-  const email = form.querySelector('input[name="email"]').value;
-  const tel = form.querySelector('input[name="tel"]').value;
-  const password = form.querySelector('input[name="password"]').value;
 
-  const body = { name, email, tel, password };
+  const form = document.querySelector("form");
 
-  fetch("http://localhost:3000/user/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  })
-    .then((response) => {
-      if (response.status === 200) return response.json();
-      throw new Error("Erro no cadastro: " + response.status);
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name = form.querySelector('input[name="name"]').value;
+    const email = form.querySelector('input[name="email"]').value;
+    const tel = form.querySelector('input[name="tel"]').value;
+    const password = form.querySelector('input[name="password"]').value;
+
+    const body = { name, email, tel, password };
+
+    fetch("http://localhost:3000/user/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     })
-    .then((data) => {
-      if (data.status === "success") {
-        localStorage.setItem("token", data.data.token);
-        localStorage.setItem("user", JSON.stringify(data.data));
-        router.navigate("/home");
-      }
-      console.log(data);
-    });
-});
+      .then((response) => {
+        if (response.status === 200) return response.json();
+        throw new Error("Erro no cadastro: " + response.status);
+      })
+      .then((data) => {
+        if (data.status === "success") {
+          localStorage.setItem("token", data.data.token);
+          localStorage.setItem("user", JSON.stringify(data.data));
+          router.navigate("/home");
+        }
+        console.log(data);
+      });
+  });
+}
+
+signup()

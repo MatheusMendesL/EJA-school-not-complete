@@ -42,7 +42,7 @@ function signup(data) {
           resolve({
             query_sql,
             affectedRows: results.affectedRows,
-            data: data_user,
+            data: data_user.data[0],
             insertId: results.insertId,
           });
         } catch (error) {
