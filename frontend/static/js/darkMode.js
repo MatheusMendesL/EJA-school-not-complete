@@ -1,8 +1,3 @@
-// Dark Mode Manager - simples e autônomo
-// - Aplica o tema salvo ou a preferência do sistema o mais cedo possível
-// - Insere automaticamente um botão de alternância no header (se existir)
-// - Persiste no localStorage em 'estudadores-theme'
-
 (function immediateApply() {
   try {
     var saved = null;
@@ -80,7 +75,6 @@ function tryInsertToggle() {
     var header = document.querySelector('header');
     var toggle = createToggle();
     if (!header) {
-      // Posiciona fixo no topo direito quando não há header
       toggle.style.position = 'fixed';
       toggle.style.top = '12px';
       toggle.style.right = '12px';
@@ -95,12 +89,12 @@ function tryInsertToggle() {
   } catch (e) {}
 }
 
-// Inserção do botão quando o DOM estiver pronto
+
 document.addEventListener('DOMContentLoaded', function () {
   tryInsertToggle();
 });
 
-// Re-tenta inserir quando há mudanças significativas no DOM
+
 var observer = new MutationObserver(function () { tryInsertToggle(); });
 observer.observe(document.documentElement, { childList: true, subtree: true });
 

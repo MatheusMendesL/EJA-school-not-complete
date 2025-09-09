@@ -41,24 +41,8 @@ async function get_task_by_id(req, res) {
   }
 }
 
-async function answer(req, res) {
-  const params = {
-    id_user: req.params.id_user,
-    id_task: req.params.id_task,
-    answer: req.params.answer,
-  };
-
-  try {
-    const { query_sql, affectedRows, data } = await functionsModel.answer(
-      params
-    );
-  } catch (error) {
-    res.status(500).json(response("error", error, null, 0, null));
-  }
-}
-
 module.exports = {
   get_task_by_id,
   get_tasks,
-  answer
+  
 };

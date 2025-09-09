@@ -102,7 +102,7 @@ async function task() {
     });
 
 
-    document.querySelector(".btn_forward").addEventListener("click", (e) => {
+    document.querySelector(".btn_forward").addEventListener("click", async (e) => {
         e.preventDefault();
         if (index < tasks.data.length) {
             document.querySelector(".btn_forward").classList.add("d-none");
@@ -110,21 +110,36 @@ async function task() {
             showQuestion();
         } else {
 
-            fetch(`progress/add`, {
-                method: "POST",
+            const data_progress = await fetch(`progress/${atob(id_matter)}/${id}/${id_user}`, {
+                method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify({
-                    user: id_user,
-                    lesson: id,
-                    matter: atob(id_matter)
-                })
-            }).then((response) => {
+            }).then(response => {
                 if (response.status === 200) return response.json();
                 throw new Error("Erro: " + response.status);
-            }).then(data => console.log(data))
+            }).then(data => {
+                return data
+            })
+
+            if (data_progress.data.length == 0) {
+                fetch(`progress/add`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        user: id_user,
+                        lesson: id,
+                        matter: atob(id_matter)
+                    })
+                }).then((response) => {
+                    if (response.status === 200) return response.json();
+                    throw new Error("Erro: " + response.status);
+                }).then(data => console.log(data))
+            }
 
             fetch(`user/update_xp/${id_user}/${xp}`, {
                 method: "PUT",
@@ -138,7 +153,7 @@ async function task() {
                     throw new Error("Erro para devolver os dados");
                 })
                 .then((data) => console.log(data));
-            router.navigate(`/finalTask?corrects=${correto}&incorrect${errado}&xp=${xp}&id=${btoa(id_user)}`);
+            router.navigate(`/finalTask?corrects=${correto}&xp=${xp}&id=${btoa(id_user)}`);
         }
     });
 

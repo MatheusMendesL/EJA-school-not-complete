@@ -32,14 +32,6 @@
     border-radius: 0.25rem;
 }
 
-.badge-warning-custom {
-    background-color: #fff3b0;
-    color: #7a5e00;
-    font-size: 0.5rem;
-    padding: 0.15rem 0.4rem;
-    border-radius: 0.25rem;
-}
-
 .btn-custom-primary {
     background-color: #00b386;
     color: #fff;
@@ -57,6 +49,13 @@
 
 .text-xxs {
     font-size: 0.5rem;
+}
+
+.alert {
+  display: inline-block !important;
+  padding: 0.2rem 0.4rem !important;
+  font-size: 0.75rem !important;
+  border-radius: 0.25rem !important;
 }
 
 /* Responsividade para finalTask */
