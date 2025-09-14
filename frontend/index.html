@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="./static/css/global.css">
     <script src="./static/js/darkMode.js"></script>
     <script src="./static/js/accessibility.js"></script>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="shortcut icon" href="./static/img/logo.png" type="image/x-icon">
+    <meta name="theme-color" content="#000000">
 
 </head>
 
@@ -89,6 +92,12 @@
             router.navigate('/signup')
         } else {
             router.navigate('/home')
+        }
+
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("/service-worker.js")
+                .then(() => console.log("Service Worker registrado!"))
+                .catch(err => console.error("Erro no SW:", err));
         }
 
         router.resolve();

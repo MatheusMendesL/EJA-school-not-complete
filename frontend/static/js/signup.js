@@ -27,9 +27,7 @@ function signup() {
       })
       .then((data) => {
         if (data.status === "success") {
-          localStorage.setItem("token", data.data.token);
-          localStorage.setItem("user", JSON.stringify(data.data));
-          router.navigate("/home");
+          router.navigate("/login");
         }
         console.log(data);
       });

@@ -7,13 +7,13 @@ async function task() {
     const id = atob(id_lesson);
     const userStorage = localStorage.getItem("user");
     const user_data = JSON.parse(userStorage);
-    const id_user = user_data.data[0].id_user;
+    const id_user = user_data[0].id_user;
 
     document.querySelector("#back").addEventListener("click", (e) => {
         e.preventDefault();
         router.navigate("/lessons?id=" + id_matter);
     });
-
+    console.log(id)
     const tasks = await fetch("task/lesson/" + id, {
         method: "GET",
         headers: {

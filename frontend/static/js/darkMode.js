@@ -7,8 +7,19 @@
     html.removeAttribute('data-theme');
     if (theme === 'dark') html.setAttribute('data-theme', 'dark');
     window.__currentTheme = theme;
+
+    // Atualiza a meta tag 'theme-color' logo no início
+    var metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      if (theme === 'dark') {
+        metaThemeColor.setAttribute('content', '#333333'); // Escuro
+      } else {
+        metaThemeColor.setAttribute('content', '#ffffff'); // Claro
+      }
+    }
   } catch (e) {}
 })();
+
 
 (function observeSystemPreference() {
   try {
@@ -26,15 +37,32 @@
 
 function setTheme(theme) {
   if (theme !== 'light' && theme !== 'dark') return;
+
   var html = document.documentElement;
   html.removeAttribute('data-theme');
   if (theme === 'dark') html.setAttribute('data-theme', 'dark');
-  try { localStorage.setItem('estudadores-theme', theme); } catch (e) {}
+  
+  // Atualizando a meta tag "theme-color" para refletir a cor do tema
+  var metaThemeColor = document.querySelector('meta[name="theme-color"]');
+  if (metaThemeColor) {
+    if (theme === 'dark') {
+      metaThemeColor.setAttribute('content', '#333333');  // Cor para o modo escuro
+    } else {
+      metaThemeColor.setAttribute('content', '#ffffff');  // Cor para o modo claro
+    }
+  }
+
+  try {
+    localStorage.setItem('estudadores-theme', theme);
+  } catch (e) {}
+
   window.__currentTheme = theme;
   updateToggleIcon();
+  
   var ev = new CustomEvent('themeChanged', { detail: { theme: theme } });
   document.dispatchEvent(ev);
 }
+
 
 function toggleTheme() {
   setTheme(window.__currentTheme === 'dark' ? 'light' : 'dark');

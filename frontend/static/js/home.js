@@ -4,8 +4,8 @@ async function home() {
   const userStorage = localStorage.getItem("user");
   const token = localStorage.getItem("token");
   const user_data = JSON.parse(userStorage);
-
-  const id = user_data.id_user;
+  console.log(user_data)
+  const id = user_data[0].id_user;
 
   try {
     // faz tudo na base de um await sem um then, separado, soq eu gosto de then
@@ -27,12 +27,12 @@ async function home() {
     const user_data = userData;
     console.log(user_data);
 
-    document.querySelector("#name").textContent = user_data.data.name;
-    document.querySelector("#level").textContent = user_data.data.ranking;
+    document.querySelector("#name").textContent = user_data.data[0].name;
+    document.querySelector("#level").textContent = user_data.data[0].ranking;
     document.querySelectorAll("#xp").forEach((e) => {
-      e.textContent = user_data.data.xp;
+      e.textContent = user_data.data[0].xp;
     });
-    document.querySelector("progress").value = user_data.data.xp;
+    document.querySelector("progress").value = user_data.data[0].xp;
 
     const mattersResponse = await fetch("matter/get_matters", {
       method: "GET",

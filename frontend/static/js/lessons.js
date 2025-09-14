@@ -1,8 +1,8 @@
 async function lessons() {
   const userStorage = localStorage.getItem("user");
   const user_data = JSON.parse(userStorage);
-
-  const id_user = user_data.data[0].id_user;
+  console.log(user_data)
+  const id_user = user_data[0].id_user;
   const urlParams = window.location.search;
   const params = new URLSearchParams(urlParams);
   const token = localStorage.getItem("token");
