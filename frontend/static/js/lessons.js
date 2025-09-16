@@ -3,8 +3,9 @@ async function lessons() {
   const user_data = JSON.parse(userStorage);
   console.log(user_data)
   const id_user = user_data[0].id_user;
-  const urlParams = window.location.search;
-  const params = new URLSearchParams(urlParams);
+  const urlParams = window.location.hash;
+  const paramsString = urlParams.split("?")[1];
+  const params = new URLSearchParams(paramsString);
   const token = localStorage.getItem("token");
   const codified_id = params.get("id");
   const id = atob(codified_id);
@@ -23,6 +24,8 @@ async function lessons() {
     .then((data) => {
       return data;
     });
+
+    console.log(matter)
 
   document
     .querySelectorAll("#matter")

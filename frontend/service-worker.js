@@ -2,24 +2,20 @@ self.addEventListener("install", event => {
   event.waitUntil(
     caches.open("estudadores-cache").then(cache => {
       return cache.addAll([
-        "/",
-        "/index.html",
+        "/",                // raiz
+        "/index.html",      // principal
         "/home.html",
         "/login.html",
         "/signup.html",
         "/task.html",
         "/lessons.html",
         "/finalTask.html",
-        "/static/img/logo.png"
+        "/static/img/logo.png",
+        "/static/css/global.css",                // importante: estilos
+        "/static/bootstrap/bootstrap.min.css",   // bootstrap
+        "/static/js/darkMode.js",                // scripts essenciais
+        "/static/js/accessibility.js"
       ]);
-    })
-  );
-});
-
-self.addEventListener("fetch", event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
     })
   );
 });

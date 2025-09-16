@@ -145,7 +145,6 @@ async function update_xp(id, xp_front) {
       conn.query(query_sql, [newXp, id], async (error, results) => {
         if (error) return reject(error);
 
-        // depois de atualizar, verifica se precisa subir nível
         const levelResult = await update_xp_level(id);
 
         resolve({

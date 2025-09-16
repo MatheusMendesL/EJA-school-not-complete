@@ -14,19 +14,18 @@
     <link rel="manifest" href="./manifest.json">
     <link rel="shortcut icon" href="./static/img/logo.png" type="image/x-icon">
     <meta name="theme-color" content="#000000">
-
 </head>
 
 <body>
 
     <div id="app" role="main"></div>
 
-    <script src="https://unpkg.com/navigo"></script>
+    <script src="https://unpkg.com/navigo@7.1.2/lib/navigo.min.js"></script>
+
 
     <script>
 
-        const router = new Navigo('/');
-        // pages that not is necessary the js and css
+        const router = new Navigo(null, { hash: false });
 
         const pages = ['initial']
         const funs = {
@@ -94,11 +93,11 @@
             router.navigate('/home')
         }
 
-        if ("serviceWorker" in navigator) {
+        /* if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("/service-worker.js")
                 .then(() => console.log("Service Worker registrado!"))
                 .catch(err => console.error("Erro no SW:", err));
-        }
+        } */
 
         router.resolve();
     </script>
